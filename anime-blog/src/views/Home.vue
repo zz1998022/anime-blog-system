@@ -53,6 +53,7 @@ export default defineComponent({
     position: relative;
     top: -.5rem;
     text-align: center;
+    user-select: none;
 
     .main-title {
       margin-bottom: 0;
