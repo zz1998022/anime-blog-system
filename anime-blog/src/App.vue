@@ -31,6 +31,22 @@ html {
   -webkit-font-smoothing: subpixel-antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  overflow: hidden;
+  background: {
+    image: url('./assets/default/background.webp');
+    attachment: fixed;
+    position: center center;
+    size: cover;
+    repeat: no-repeat;
+  }
+
+  &::after {
+    display: block;
+    content: '';
+    height: 100%;
+    background-color: rgba($color: #000, $alpha: .3);
+  }
+
   height: 3000px; // test nav
 }
 
