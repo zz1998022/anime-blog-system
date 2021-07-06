@@ -37,6 +37,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import '../../styles/variable';
+
 .nav {
   display: flex;
   align-items: center;
@@ -56,7 +58,7 @@ export default defineComponent({
     transition: color .3s;
 
     &:hover {
-      color: rgba($color: #fff, $alpha: 1);
+      color: #fff;
     }
   }
 
@@ -68,17 +70,11 @@ export default defineComponent({
     font-size: .8rem;
     text-shadow: 1px 1px 1px rgba($color: #000, $alpha: .3);
 
-    .item::after {
-      content: '';
-      border: 0;
-    }
-
-    .item:not(.ant-menu-item-selected) a {
-        color: rgba($color: #fff, $alpha: .7);
-      transition: color .3s;
+    .item a {
+      color: rgba($color: #fff, $alpha: .7);
 
       &:hover {
-        color: rgba($color: #fff, $alpha: 1);
+        color: #fff;
       }
     }
   }
@@ -90,10 +86,18 @@ export default defineComponent({
 
   .title {
     color: rgba($color: #fff, $alpha: .7);
+
+    &:hover {
+      color: $theme-color;
+    }
   }
 
-  .menu .item:not(.ant-menu-item-selected) a {
+  .menu .item a {
     color: rgba($color: #fff, $alpha: .7);
+
+    &:hover {
+      color: $theme-color;
+    }
   }
 }
 
