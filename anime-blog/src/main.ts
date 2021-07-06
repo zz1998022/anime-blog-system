@@ -1,12 +1,12 @@
 import { createApp } from 'vue'
 import { router } from './router'
-import { Button } from 'ant-design-vue'
+import { Layout, Typography, Menu } from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import App from './App.vue'
 
 const app = createApp(App)
 
-const antUi = [Button]
+const antUi = [Layout, Typography, Menu]
 antUi.forEach(ui => {
   app.use(ui)
 })
