@@ -11,6 +11,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+/* 字體 */
 // Fira Code 400 500 700
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap');
 
@@ -19,12 +20,13 @@ export default defineComponent({
   src: url('./assets/fonts/SourceHanSansTW-VF.otf.woff2');
 }
 
+/* root font for rem */
 html {
   font-size: 20px;
 }
 
+/* 全局 */
 #app {
-  font-family: 'Fira Code', monospace;
   font-family: 'Fira Code', 'SourceHanSansTW', monospace;
   -webkit-font-smoothing: subpixel-antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -32,6 +34,7 @@ html {
   height: 3000px; // test nav
 }
 
+/* 滾動條 */
 body::-webkit-scrollbar {
   width: 0.3rem;
 }
