@@ -13,10 +13,38 @@
     </a-layout-content>
   </header>
 
-  <!-- 文章區 -->
-  <!-- <HomePost /> -->
-  <h1>{{ postData }}</h1>
-  <!-- 我覺得這個 HomePost 可以不用寫成一個組件 -->
+  <!-- 主要內容 -->
+  <main class="main middle">
+    <!-- 最近文章 -->
+    <template v-for="post in recentPost" :key="post.id">
+      <a href="#">
+        <div class="card recent-post">
+          <!-- 文章封面 -->
+          <div class="post-card-picture">
+            <img :src="post.picture">
+          </div>
+
+          <!-- 文章資訊 -->
+          <div class="post-info">
+            <!-- 文章標題 -->
+            <h3 class="post-title">
+              {{ post.title }}
+            </h3>
+            <!-- 發表時間 -->
+            <span>發表於 {{ post.publistTime }} | </span>
+            <!-- 更新時間 -->
+            <span v-if="post.updateTime">更新於 {{ post.updateTime }} | </span>
+            <!-- 分類 -->
+            <span>{{ post.category }} | </span>
+            <!-- 標籤 -->
+            <span>{{ post.tag }} | </span>
+            <!-- 文章內容 -->
+            <p class="post-content-preview"> {{ post.content }}</p>
+          </div>
+        </div>
+      </a>
+    </template>
+  </main>
 </template>
 
 <script lang="ts">
@@ -30,24 +58,25 @@ export default defineComponent({
     Nav
   },
   setup() {
-    const postData = ref([])
+    const recentPost = ref([])
 
-    axios.get('http://localhost:3000/test/postData.json')
-      .then(res => {
-        console.log(res)
-        postData.value = res.data
-      })
+    axios.get('http://localhost:3000/test/recentPost.json')
+      .then(res => (recentPost.value = res.data))
 
     return {
-      postData
+      recentPost
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/common';
+
 // 背景圖
 .main-background {
+  position: relative;
+  z-index: 9998;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,9 +89,18 @@ export default defineComponent({
     repeat: no-repeat;
   }
 
+  &::before {
+    content: '';
+    position: absolute;
+    background-color: rgba($color: #000, $alpha: .3);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
   // 標題容器
   .title-container {
-    z-index: 1;
+    // z-index: 9999;
     position: relative;
     top: -.5rem;
     text-align: center;
@@ -90,4 +128,78 @@ export default defineComponent({
     }
   }
 }
+
+// 主要內容
+.main {
+  display: flex;
+  padding: 40px 15px;
+
+  // 最近文章
+  .recent-post {
+    display: flex;
+    align-items: center;
+    height: 17rem;
+
+    // 文章封面容器
+    .post-card-picture {
+      width: 45%;
+      height: 100%;
+      overflow: hidden;
+
+      // 文章封面
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .6s;
+
+        // 縮放封面
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    // 文章資訊容器
+    .post-info {
+      width: 55%;
+      padding: 0 40px;
+
+      // 文章標題
+      .post-title {
+        margin-bottom: 6px;
+        font-size: 1.4rem;
+        color: #fff;
+
+        // 單行省略號
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      // 發表時間、更新時間、分類、標籤
+      span {
+        font-size: 16px;
+        font-weight: bold;
+        color: #858585;
+      }
+
+      // 文章內容預覽
+      .post-content-preview {
+        margin: 6px 0 0 0;
+        font-size: 16px;
+
+        /* === 暫時 === */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        // 限制在一個塊元素顯示的文本行數
+        -webkit-line-clamp: 3;
+        // 設定伸縮盒的子元素排列方式
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+}
+
 </style>
