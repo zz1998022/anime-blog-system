@@ -10,7 +10,7 @@
   "scripts": {
     "start": "egg-scripts start --daemon --title=egg-server-anime-blog-server",
     "stop": "egg-scripts stop --title=egg-server-anime-blog-server",
-    "dev": "egg-bin dev",
+    "dev": "egg-bin dev --node-options--max-http-header-size=160000",
     "debug": "egg-bin debug",
     "test-local": "egg-bin test",
     "test": "npm run lint -- --fix && npm run test-local",
@@ -23,6 +23,9 @@
   },
   "dependencies": {
     "egg": "^2.6.1",
+    "egg-cors": "^2.2.3",
+    "egg-jwt": "^3.1.7",
+    "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.6.0"
   },
   "devDependencies": {
@@ -49,7 +52,9 @@
     "type": "git",
     "url": ""
   },
-  "eslintIgnore": ["coverage"],
+  "eslintIgnore": [
+    "coverage"
+  ],
   "author": "Lemon",
   "license": "MIT"
 }

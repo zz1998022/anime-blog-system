@@ -3,5 +3,6 @@ import { Application } from 'egg';
 export default (app: Application) => {
   const { controller, router } = app;
 
-  router.get('/', controller.home.index);
+  // 添加文章
+  router.put('/article',controller.article.addArticle);
 };
