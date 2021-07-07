@@ -30,6 +30,9 @@ export default class ArticleController extends Controller {
   }
   // 获取文章数据
   public async getArticle() {
-
+    const { ctx } = this;
+    // 获取参数
+    const { pageNum,pageSize } = ctx.request.query;
+    await ctx.service.article.getArticl(Number(pageNum),Number(pageSize));
   }
 }

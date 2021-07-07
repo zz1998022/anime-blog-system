@@ -5,4 +5,6 @@ export default (app: Application) => {
 
   // 添加文章
   router.put('/article',controller.article.addArticle);
+  // 获取文章数据
+  router.get('/article',controller.article.getArticle);
 };
