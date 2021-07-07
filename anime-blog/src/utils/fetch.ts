@@ -14,12 +14,6 @@ const instance = axios.create({
   timeout: 7000,
   // 最大发包长度
   maxContentLength: 2000,
-  // 重试次数
-  retry: 3,
-  // 重试延时，3秒重试一次
-  retryDelay: 3000,
-  // 重试条件，默认只要是错误都需要重试
-  shouldRetry: () => true
 });
 
 // 3.声明请求拦截器()
@@ -95,11 +89,6 @@ instance.interceptors.response.use(
 
     // 检查我们重试的次数是否超出最大重试次数
     if (config.__retryCount >= config.retry) {
-      // 使用reject方法抛出错误
-      Notification({
-        title: "请求超时",
-        message: "当前网络不佳，请稍后刷新重试"
-      });
       console.log("请求超时");
       return Promise.reject(error);
     }
