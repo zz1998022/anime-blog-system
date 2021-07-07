@@ -2,3 +2,11 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+
+// 卡片
+.card {
+  color: #fff;
+  border-radius: 15px;
+  background-color: rgba($color: #1d1d1d, $alpha: .7);
+  overflow: hidden;
+}
