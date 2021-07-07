@@ -43,10 +43,12 @@ html {
   // 黑色遮罩
   &::before {
     position: fixed;
+    z-index: 999;
     content: '';
     height: 100%;
     width: 100%;
-    background-color: rgba($color: #000, $alpha: .3);
+    background-color: rgba($color: #000, $alpha: .2);
+    pointer-events: none;
   }
 
   height: 3000px; // test nav
