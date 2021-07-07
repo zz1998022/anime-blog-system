@@ -40,10 +40,12 @@ html {
     repeat: no-repeat;
   }
 
-  &::after {
-    display: block;
+  // 黑色遮罩
+  &::before {
+    position: fixed;
     content: '';
     height: 100%;
+    width: 100%;
     background-color: rgba($color: #000, $alpha: .3);
   }
 

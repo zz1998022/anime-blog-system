@@ -1,6 +1,10 @@
 <template>
+  <!-- 頭部 -->
   <header>
+    <!-- 導航條 -->
     <Nav />
+
+    <!-- 背景圖與標題 -->
     <a-layout-content class="main-background">
       <div class="title-container">
         <h2 class="main-title">NekoChan</h2>
@@ -8,10 +12,16 @@
       </div>
     </a-layout-content>
   </header>
+
+  <!-- 文章區 -->
+  <!-- <HomePost /> -->
+  <h1>{{ postData }}</h1>
+  <!-- 我覺得這個 HomePost 可以不用寫成一個組件 -->
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import axios from 'axios'
 import Nav from '../components/Nav/index.vue'
 
 export default defineComponent({
@@ -20,13 +30,23 @@ export default defineComponent({
     Nav
   },
   setup() {
+    const postData = ref([])
+
+    axios.get('http://localhost:3000/test/postData.json')
+      .then(res => {
+        console.log(res)
+        postData.value = res.data
+      })
+
     return {
+      postData
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
+// 背景圖
 .main-background {
   display: flex;
   justify-content: center;
@@ -40,14 +60,7 @@ export default defineComponent({
     repeat: no-repeat;
   }
 
-  &::before {
-    content: '';
-    position: absolute;
-    background-color: rgba($color: #000, $alpha: .3);
-    width: 100%;
-    height: 100%;
-  }
-
+  // 標題容器
   .title-container {
     z-index: 1;
     position: relative;
@@ -55,6 +68,7 @@ export default defineComponent({
     text-align: center;
     user-select: none;
 
+    // 主標題
     .main-title {
       margin-bottom: 0;
       color: #fff;
@@ -65,6 +79,7 @@ export default defineComponent({
       }
     }
 
+    // 副標題
     .sub-title {
       color: #fff;
       text-shadow: rgb(255 255 255 / 80%) 0 0 10px, rgb(255 255 255 / 80%) 0 0 20px, rgb(255 255 255 / 80%) 0 0 30px, rgb(255 0 102 / 80%) 0 0 40px, rgb(255 0 102 / 80%) 0 0 70px;
