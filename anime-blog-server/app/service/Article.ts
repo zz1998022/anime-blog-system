@@ -49,6 +49,7 @@ export default class Article extends Service {
         this.ctx.body = {
           code: 200,
           message: '数据获取成功!',
+          success: true,
           pageNum,
           pageSize,
           total: total[0].total,
@@ -59,6 +60,7 @@ export default class Article extends Service {
       this.ctx.body = {
         code: 400,
         message: '参数错误!',
+        success: false,
         data: null
       }
     }
