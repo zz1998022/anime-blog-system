@@ -78,17 +78,21 @@
       </div>
     </div>
   </main>
+
+  <!-- 底部 -->
+  <Footer />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
-import { Nav } from '../components/'
+import { Nav, Footer } from '../components/'
 
 export default defineComponent({
   name: 'Home',
   components: {
-    Nav
+    Nav,
+    Footer
   },
   setup() {
     const recentPost = ref([])
