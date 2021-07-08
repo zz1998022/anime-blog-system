@@ -83,7 +83,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
-import Nav from '../components/Nav/index.vue'
+import { Nav } from '../components/'
 
 export default defineComponent({
   name: 'Home',
