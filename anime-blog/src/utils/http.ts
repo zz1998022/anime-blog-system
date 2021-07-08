@@ -19,7 +19,7 @@ const getURL = () => {
   if (DEV) {
     serverURL = baseHost.API1.dev_host;
   } else {
-    serverURL = baseHost.API1.pro_host
+    serverURL = baseHost.API1.pro_host;
   }
 
   return serverURL;
