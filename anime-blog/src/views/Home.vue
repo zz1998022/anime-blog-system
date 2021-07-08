@@ -16,34 +16,73 @@
   <!-- 主要內容 -->
   <main class="main middle">
     <!-- 最近文章 -->
-    <template v-for="post in recentPost" :key="post.id">
-      <a href="#">
-        <div class="card recent-post">
-          <!-- 文章封面 -->
-          <div class="post-card-picture">
-            <img :src="post.picture">
-          </div>
+    <div class="recent-post">
+      <template v-for="post in recentPost" :key="post.id">
+        <a href="#">
+          <div class="card recent-post-card">
+            <!-- 文章封面 -->
+            <div class="post-card-picture">
+              <img :src="post.picture" loading="lazy">
+            </div>
 
-          <!-- 文章資訊 -->
-          <div class="post-info">
-            <!-- 文章標題 -->
-            <h3 class="post-title">
-              {{ post.title }}
-            </h3>
-            <!-- 發表時間 -->
-            <span>發表於 {{ post.publistTime }} | </span>
-            <!-- 更新時間 -->
-            <span v-if="post.updateTime">更新於 {{ post.updateTime }} | </span>
-            <!-- 分類 -->
-            <span>{{ post.category }} | </span>
-            <!-- 標籤 -->
-            <span>{{ post.tag }} | </span>
-            <!-- 文章內容 -->
-            <p class="post-content-preview"> {{ post.content }}</p>
+            <!-- 文章資訊 -->
+            <div class="post-info">
+              <!-- 文章標題 -->
+              <h3 class="post-title">
+                {{ post.title }}
+              </h3>
+              <!-- 發表時間 -->
+              <span>發表於 {{ post.publistTime }} | </span>
+              <!-- 更新時間 -->
+              <span v-if="post.updateTime">更新於 {{ post.updateTime }} | </span>
+              <!-- 分類 -->
+              <span>{{ post.category }} | </span>
+              <!-- 標籤 -->
+              <span>{{ post.tag }} | </span>
+              <!-- 文章內容 -->
+              <p class="post-content-preview"> {{ post.content }}</p>
+            </div>
+          </div>
+        </a>
+      </template>
+    </div>
+
+    <!-- 側邊資訊 -->
+    <div class="right aside-content">
+      <!-- 第一塊 - 個人資訊 -->
+      <div class="card info-card">
+        <!-- 頭像 名稱 簡介 -->
+        <div class="info-card-avatar">
+          <a-avatar class="avatar" :size="110" src="/default/avatar.webp"></a-avatar>
+          <h2>NekoChan</h2>
+          <h3>一位愛貓人士</h3>
+        </div>
+        <!-- 部落格資訊 -->
+        <div class="info-card-data">
+          <!-- 文章數量 -->
+          <div class="info-card-data-item">
+            <a href="#">
+              <div class="headline">文章</div>
+              <div class="length-num">1</div>
+            </a>
+          </div>
+          <!-- 標籤數量 -->
+          <div class="info-card-data-item">
+            <a href="#">
+              <div class="headline">標籤</div>
+              <div class="length-num">1</div>
+            </a>
+          </div>
+          <!-- 分類數量 -->
+          <div class="info-card-data-item">
+            <a href="#">
+              <div class="headline">分類</div>
+              <div class="length-num">1</div>
+            </a>
           </div>
         </div>
-      </a>
-    </template>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -82,7 +121,7 @@ export default defineComponent({
   align-items: center;
   height: 100vh;
   background: {
-    image: url('../assets/default/Home/main.webp');
+    image: url('/default/Home/main.webp');
     attachment: fixed;
     position: center center;
     size: cover;
@@ -137,69 +176,142 @@ export default defineComponent({
   // 最近文章
   .recent-post {
     display: flex;
-    align-items: center;
-    height: 17rem;
+    width: 75%  ;
 
-    // 文章封面容器
-    .post-card-picture {
-      width: 45%;
-      height: 100%;
-      overflow: hidden;
+    .recent-post-card {
+      display: flex;
+      align-items: center;
+      height: 17rem;
 
-      // 文章封面
-      img {
-        width: 100%;
+      // 文章封面容器
+      .post-card-picture {
+        width: 45%;
         height: 100%;
-        object-fit: cover;
-        transition: transform .6s;
+        overflow: hidden;
 
-        // 縮放封面
-        &:hover {
-          transform: scale(1.1);
+        // 文章封面
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform .6s;
+
+          // 縮放封面
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      // 文章資訊容器
+      .post-info {
+        width: 55%;
+        padding: 0 40px;
+
+        // 文章標題
+        .post-title {
+          margin-bottom: 6px;
+          font-size: 1.4rem;
+          color: #fff;
+
+          // 單行省略號
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        // 發表時間、更新時間、分類、標籤
+        span {
+          font-size: 16px;
+          font-weight: bold;
+          color: #858585;
+        }
+
+        // 文章內容預覽
+        .post-content-preview {
+          margin: 6px 0 0 0;
+          font-size: 16px;
+
+          /* === 暫時 === */
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          // 限制在一個塊元素顯示的文本行數
+          -webkit-line-clamp: 3;
+          // 設定伸縮盒的子元素排列方式
+          -webkit-box-orient: vertical;
         }
       }
     }
+  }
 
-    // 文章資訊容器
-    .post-info {
-      width: 55%;
-      padding: 0 40px;
+  // 側邊資訊
+  .aside-content {
+    width: 25%;
+    padding-left: 15px;
 
-      // 文章標題
-      .post-title {
-        margin-bottom: 6px;
-        font-size: 1.4rem;
-        color: #fff;
+    // 第一塊 - 個人資訊
+    .info-card {
+      display: flex;
+      flex-direction: column;
+      justify-items: center;
+      align-items: center;
+      padding: 20px 24px;
+      text-align: center;
 
-        // 單行省略號
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      // 頭像 名稱 簡介
+      .info-card-avatar {
+        .avatar {
+          transition: transform .5s;
+
+          &:hover {
+            transform: scale(1.1) rotate(360deg);
+          }
+        }
+
+        h2 {
+          margin: {
+            top: 10px;
+            bottom: 0;
+          }
+          font-weight: 500;
+          font-size: 1.2rem;
+          color: #fff;
+        }
+
+        h3 {
+          color: #fff;
+        }
       }
 
-      // 發表時間、更新時間、分類、標籤
-      span {
-        font-size: 16px;
-        font-weight: bold;
-        color: #858585;
-      }
+      // 部落格資訊
+      .info-card-data {
+        display: flex;
+        flex-direction: row;
+        margin: {
+          top: 14px;
+          bottom: 4px;
+        }
+        user-select: none;
 
-      // 文章內容預覽
-      .post-content-preview {
-        margin: 6px 0 0 0;
-        font-size: 16px;
+        .info-card-data-item {
+          width: 76.5px;
+          height: 70px;
 
-        /* === 暫時 === */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        // 限制在一個塊元素顯示的文本行數
-        -webkit-line-clamp: 3;
-        // 設定伸縮盒的子元素排列方式
-        -webkit-box-orient: vertical;
+          a {
+            color: #fff;
+
+            .headline {
+              font-size: .8rem;
+            }
+
+            .length-num {
+              font-size: 1rem;
+            }
+          }
+        }
       }
     }
   }
 }
-
 </style>

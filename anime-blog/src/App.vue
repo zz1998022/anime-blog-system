@@ -33,7 +33,7 @@ html {
   scroll-behavior: smooth;
   overflow: hidden;
   background: {
-    image: url('./assets/default/background.webp');
+    image: url('/default/background.webp');
     attachment: fixed;
     position: center center;
     size: cover;
