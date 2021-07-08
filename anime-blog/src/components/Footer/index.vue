@@ -32,9 +32,6 @@ export default defineComponent({
   padding: 2rem 1rem;
   color: #fff;
   text-align: center;
-  // background: {
-  //   color: pink;
-  // }
   background: linear-gradient(-45deg, #ee7752, #ce3e75, #ff5c5c, #fd589d);
   background-size: 400% 400%;
   animation: Gradient 10s ease infinite;

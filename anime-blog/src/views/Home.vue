@@ -137,7 +137,6 @@ export default defineComponent({
 
   // 標題容器
   .title-container {
-    // z-index: 9999;
     position: relative;
     top: -.5rem;
     text-align: center;

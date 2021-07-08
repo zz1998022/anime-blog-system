@@ -50,8 +50,6 @@ html {
     background-color: rgba($color: #000, $alpha: .2);
     pointer-events: none;
   }
-
-  // height: 3000px; // test nav
 }
 
 /* 滾動條 */
