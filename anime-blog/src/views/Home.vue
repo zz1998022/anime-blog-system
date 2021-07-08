@@ -219,8 +219,10 @@ export default defineComponent({
 
         // 發表時間、更新時間、分類、標籤
         span {
-          font-size: 16px;
-          font-weight: bold;
+          font: {
+            size: 16px;
+            weight: bold;
+          }
           color: #858585;
         }
 
@@ -271,8 +273,10 @@ export default defineComponent({
             top: 10px;
             bottom: 0;
           }
-          font-weight: 500;
-          font-size: 1.2rem;
+          font: {
+            weight: 500;
+            size: 1.2rem;
+          }
           color: #fff;
         }
 
