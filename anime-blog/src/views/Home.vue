@@ -27,19 +27,13 @@
 
             <!-- 文章資訊 -->
             <div class="post-info">
-              <!-- 文章標題 -->
               <h3 class="post-title">
                 {{ post.title }}
               </h3>
-              <!-- 發表時間 -->
               <span>發表於 {{ post.publistTime }} | </span>
-              <!-- 更新時間 -->
               <span v-if="post.updateTime">更新於 {{ post.updateTime }} | </span>
-              <!-- 分類 -->
               <span>{{ post.category }} | </span>
-              <!-- 標籤 -->
               <span>{{ post.tag }} | </span>
-              <!-- 文章內容 -->
               <p class="post-content-preview"> {{ post.content }}</p>
             </div>
           </div>
@@ -176,7 +170,7 @@ export default defineComponent({
   // 最近文章
   .recent-post {
     display: flex;
-    width: 75%  ;
+    width: 75%;
 
     .recent-post-card {
       display: flex;
