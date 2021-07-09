@@ -78,17 +78,21 @@
       </div>
     </div>
   </main>
+
+  <!-- 底部 -->
+  <Footer />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
-import Nav from '../components/Nav/index.vue'
+import { Nav, Footer } from '../components/'
 
 export default defineComponent({
   name: 'Home',
   components: {
-    Nav
+    Nav,
+    Footer
   },
   setup() {
     const recentPost = ref([])
@@ -133,7 +137,6 @@ export default defineComponent({
 
   // 標題容器
   .title-container {
-    // z-index: 9999;
     position: relative;
     top: -.5rem;
     text-align: center;
@@ -216,8 +219,10 @@ export default defineComponent({
 
         // 發表時間、更新時間、分類、標籤
         span {
-          font-size: 16px;
-          font-weight: bold;
+          font: {
+            size: 16px;
+            weight: bold;
+          }
           color: #858585;
         }
 
@@ -268,8 +273,10 @@ export default defineComponent({
             top: 10px;
             bottom: 0;
           }
-          font-weight: 500;
-          font-size: 1.2rem;
+          font: {
+            weight: 500;
+            size: 1.2rem;
+          }
           color: #fff;
         }
 
