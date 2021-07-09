@@ -1,5 +1,8 @@
 {
-  "version": "0.0.0",
+  "name": "anime-blog-client",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "NekoChanTaiwan",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
