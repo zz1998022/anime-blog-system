@@ -85,7 +85,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import axios from 'axios'
+import { loliGet } from '../utils/loli'
 import { Nav, Footer } from '../components/'
 
 export default defineComponent({
@@ -97,8 +97,10 @@ export default defineComponent({
   setup() {
     const recentPost = ref([])
 
-    axios.get('http://localhost:3000/test/recentPost.json')
-      .then(res => (recentPost.value = res.data))
+    loliGet('/article/recently/', {
+      pageNum: 1,
+      pageSize: 10
+    }).then(res => (recentPost.value = res.data))
 
     return {
       recentPost
@@ -174,80 +176,96 @@ export default defineComponent({
   // 最近文章
   .recent-post {
     display: flex;
+    flex-direction: column;
     width: 75%;
 
-    .recent-post-card {
-      display: flex;
-      align-items: center;
-      height: 17rem;
+    a {
+      // 文章間距
+      &:not(:first-child) {
+        margin-top: 1rem;
+      }
 
-      // 文章封面容器
-      .post-card-picture {
-        width: 45%;
-        height: 100%;
-        overflow: hidden;
+      // 偶數封面
+      &:nth-child(even)
+        .recent-post-card
+        .post-card-picture {
+        order: 1;
+      }
 
-        // 文章封面
-        img {
-          width: 100%;
+      .recent-post-card {
+        display: flex;
+        align-items: center;
+        height: 17rem;
+
+        // 文章封面容器
+        .post-card-picture {
+          width: 45%;
           height: 100%;
-          object-fit: cover;
-          transition: transform .6s;
+          overflow: hidden;
 
-          // 縮放封面
-          &:hover {
-            transform: scale(1.1);
+          // 文章封面
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s;
+
+            // 縮放封面
+            &:hover {
+              transform: scale(1.1);
+            }
           }
         }
-      }
 
-      // 文章資訊容器
-      .post-info {
-        width: 55%;
-        padding: 0 40px;
+        // 文章資訊容器
+        .post-info {
+          width: 55%;
+          padding: 0 40px;
 
-        // 文章標題
-        .post-title {
-          margin-bottom: 6px;
-          font-size: 1.4rem;
-          color: #fff;
-          transition: color .5s;
+          // 文章標題
+          .post-title {
+            margin-bottom: 6px;
+            font-size: 1.4rem;
+            color: #fff;
+            transition: color .5s;
 
-          // 單行省略號
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        // 發表時間、更新時間、分類、標籤
-        span {
-          font: {
-            size: 16px;
-            weight: bold;
+            // 單行省略號
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
-          color: #858585;
+
+          // 發表時間、更新時間、分類、標籤
+          span {
+            font: {
+              size: 16px;
+              weight: bold;
+            }
+            color: #858585;
+          }
+
+          // 文章內容預覽
+          .post-content-preview {
+            margin: 6px 0 0 0;
+            font-size: 16px;
+
+            /* === 暫時 === */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            // 限制在一個塊元素顯示的文本行數
+            -webkit-line-clamp: 3;
+            // 設定伸縮盒的子元素排列方式
+            -webkit-box-orient: vertical;
+          }
         }
 
-        // 文章內容預覽
-        .post-content-preview {
-          margin: 6px 0 0 0;
-          font-size: 16px;
-
-          /* === 暫時 === */
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          // 限制在一個塊元素顯示的文本行數
-          -webkit-line-clamp: 3;
-          // 設定伸縮盒的子元素排列方式
-          -webkit-box-orient: vertical;
+        &:hover .post-info .post-title {
+          color: $theme-color;
         }
-      }
-
-      &:hover .post-info .post-title {
-        color: $theme-color;
       }
     }
+
   }
 
   // 側邊資訊
