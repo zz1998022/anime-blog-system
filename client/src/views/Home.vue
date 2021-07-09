@@ -18,8 +18,7 @@
     <!-- 最近文章 -->
     <div class="recent-post">
       <template v-for="post in recentPost" :key="post.id">
-        <a href="#">
-          <div class="card recent-post-card">
+        <a class="card recent-post-card" href="#">
             <!-- 文章封面 -->
             <div class="post-card-picture">
               <img :src="post.picture" loading="lazy">
@@ -36,7 +35,6 @@
               <span>{{ post.tag }} | </span>
               <p class="post-content-preview"> {{ post.content }}</p>
             </div>
-          </div>
         </a>
       </template>
     </div>
@@ -179,7 +177,12 @@ export default defineComponent({
     flex-direction: column;
     width: 75%;
 
-    a {
+    // 文章卡片
+    .recent-post-card {
+      display: flex;
+      align-items: center;
+      height: 17rem;
+
       // 文章間距
       &:not(:first-child) {
         margin-top: 1rem;
@@ -191,11 +194,6 @@ export default defineComponent({
         .post-card-picture {
         order: 1;
       }
-
-      .recent-post-card {
-        display: flex;
-        align-items: center;
-        height: 17rem;
 
         // 文章封面容器
         .post-card-picture {
@@ -263,7 +261,6 @@ export default defineComponent({
         &:hover .post-info .post-title {
           color: $theme-color;
         }
-      }
     }
 
   }
