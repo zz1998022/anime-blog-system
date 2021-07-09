@@ -66,4 +66,46 @@ export default class Article extends Service {
     }
 
   }
+  // 获取最近文章
+  public async getRecentArticles(pageNum:number = 1,pageSize:number = 10) {
+    const { ctx,app } = this;
+    // 创建sql
+    let sql = `
+    select 
+    a.id,
+    a.title,
+    a.picture,
+    a.content,
+    a.publishTime,
+    a.updateTime,
+    atag.tagName,
+    cat.category_name 
+    from anime_article as a inner join anime_tag as atag inner join anime_category as cat on a.tag = atag.id and a.category = cat.id order by a.publishTime desc limit ?,?;
+    `;
+    
+    try {
+      // 执行sql
+      const total = await app.mysql.query('select count(*) as total from anime_article;',[]);
+      const result = await app.mysql.query(sql,[(pageNum - 1) * pageSize,pageSize]) as [];
+      // 判断是否有数据
+      if (result) {
+        ctx.body = {
+          code: 200,
+          message: '数据获取成功!',
+          success: true,
+          pageNum,
+          pageSize,
+          total: total[0].total,
+          data: result
+        }
+      }
+    } catch (error) {
+      ctx.body = {
+        code: 500,
+        message: '服务器内部错误!',
+        success: false,
+        data: null
+      }
+    }
+  }
 }

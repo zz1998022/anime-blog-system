@@ -33,6 +33,23 @@ export default class ArticleController extends Controller {
     const { ctx } = this;
     // 获取参数
     const { pageNum,pageSize } = ctx.request.query;
+    console.log(ctx.query);
     await ctx.service.article.getArticl(Number(pageNum),Number(pageSize));
+  }
+  // 获取最近文章
+  public async getRecentArticles() {
+    const { ctx } = this;
+    const { pageNum,pageSize } = ctx.request.query;
+    // 判断是否为数字
+    if (isNaN(Number(pageNum)) || isNaN(Number(pageSize))) {
+      return ctx.body = {
+        code: 400,
+        message: '参数错误!',
+        success: false,
+        data: null
+      }
+    }
+
+    await ctx.service.article.getRecentArticles(Number(pageNum),Number(pageSize));
   }
 }
