@@ -29,11 +29,11 @@
               <h3 class="post-title">
                 {{ post.title }}
               </h3>
-              <span>發表於 {{ post.publistTime }} | </span>
-              <span v-if="post.updateTime">更新於 {{ post.updateTime }} | </span>
-              <span>{{ post.category }} | </span>
-              <span>{{ post.tag }} | </span>
-              <p class="post-content-preview"> {{ post.content }}</p>
+              <span>發表於 {{ post.publishTime }}</span>
+              <span v-if="post.updateTime"> | 更新於 {{ post.updateTime }}</span>
+              <span v-if="post.category"> | {{ post.category }}</span>
+              <span v-if="post.tag"> | {{ post.tag }}</span>
+              <p class="post-content-preview">{{ post.content }}</p>
             </div>
         </a>
       </template>
@@ -83,6 +83,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import dayjs from 'dayjs'
 import { loliGet } from '../utils/loli'
 import { Nav, Footer } from '../components/'
 
@@ -98,7 +99,13 @@ export default defineComponent({
     loliGet('/article/recently/', {
       pageNum: 1,
       pageSize: 10
-    }).then(res => (recentPost.value = res.data))
+    }).then(res => {
+      recentPost.value = res.data.map(item => {
+        // 格式化日期
+        item.publishTime = dayjs(item.publishTime).format('YYYY/DD/MM')
+        return item
+      })
+    })
 
     return {
       recentPost
@@ -187,9 +194,12 @@ export default defineComponent({
         margin-top: 1rem;
       }
 
-      // 偶數封面
-      &:nth-child(even) .post-card-picture {
-        order: 1;
+      // 偶數
+      &:nth-child(even) {
+        // 封面
+        .post-card-picture {
+          order: 1;
+        }
       }
 
       // 文章封面容器
