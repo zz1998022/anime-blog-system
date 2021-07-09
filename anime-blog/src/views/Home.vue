@@ -109,6 +109,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import '../styles/common';
+@import '../styles/variable';
 
 // 背景圖
 .main-background {
@@ -210,6 +211,7 @@ export default defineComponent({
           margin-bottom: 6px;
           font-size: 1.4rem;
           color: #fff;
+          transition: color .5s;
 
           // 單行省略號
           white-space: nowrap;
@@ -240,6 +242,10 @@ export default defineComponent({
           // 設定伸縮盒的子元素排列方式
           -webkit-box-orient: vertical;
         }
+      }
+
+      &:hover .post-info .post-title {
+        color: $theme-color;
       }
     }
   }
