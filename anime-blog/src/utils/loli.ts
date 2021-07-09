@@ -70,6 +70,7 @@ loli.interceptors.response.use(
 
     // 计算重试次数
     config.__retryCount += 1
+
     // 创建一个新的 Promise 来处理 exponential backoff
     let backoff = new Promise(resolve => {
       setTimeout(_ => {
@@ -94,6 +95,7 @@ loli.defaults.baseURL = DEV ? baseHost.API1.dev_host : baseHost.API1.pro_host
  */
  export const loliGet = async (path: string, params?: object) => {
   try {
+    console.log(`get ${loli.defaults.baseURL}${path}`)
     const response = await loli.get(path, { params })
     return response.data
 
@@ -107,6 +109,7 @@ loli.defaults.baseURL = DEV ? baseHost.API1.dev_host : baseHost.API1.pro_host
  */
  export const loliPost = async (path: string, params?: object) => {
   try {
+    console.log(`post ${loli.defaults.baseURL}${path}`)
     const response = await loli.post(path, { params })
     return response.data
 
@@ -120,6 +123,7 @@ loli.defaults.baseURL = DEV ? baseHost.API1.dev_host : baseHost.API1.pro_host
  */
  export const loliPut = async (path: string, params?: object) => {
   try {
+    console.log(`put ${loli.defaults.baseURL}${path}`)
     const response = await loli.put(path, { params })
     return response.data
 
@@ -133,6 +137,7 @@ loli.defaults.baseURL = DEV ? baseHost.API1.dev_host : baseHost.API1.pro_host
  */
  export const loliDelete = async (path: string, params?: object) => {
   try {
+    console.log(`delete ${loli.defaults.baseURL}${path}`)
     const response = await loli.delete(path, { data: params })
     return response.data
 
