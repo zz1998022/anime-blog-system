@@ -109,7 +109,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import '../styles/common';
-@import '../styles/variable';
 
 // 背景圖
 .main-background {
@@ -189,78 +188,72 @@ export default defineComponent({
       }
 
       // 偶數封面
-      &:nth-child(even)
-        .recent-post-card
-        .post-card-picture {
+      &:nth-child(even) .post-card-picture {
         order: 1;
       }
 
-        // 文章封面容器
-        .post-card-picture {
-          width: 45%;
+      // 文章封面容器
+      .post-card-picture {
+        width: 45%;
+        height: 100%;
+        overflow: hidden;
+
+        // 文章封面
+        img {
+          width: 100%;
           height: 100%;
+          object-fit: cover;
+          transition: transform .6s;
+
+          // 縮放封面
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      // 文章資訊容器
+      .post-info {
+        width: 55%;
+        padding: 0 40px;
+
+        // 文章標題
+        .post-title {
+          margin-bottom: 6px;
+          font-size: 1.4rem;
+          color: #fff;
+          transition: color .5s;
+
+          // 單行省略號
+          white-space: nowrap;
           overflow: hidden;
-
-          // 文章封面
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform .6s;
-
-            // 縮放封面
-            &:hover {
-              transform: scale(1.1);
-            }
-          }
+          text-overflow: ellipsis;
         }
 
-        // 文章資訊容器
-        .post-info {
-          width: 55%;
-          padding: 0 40px;
-
-          // 文章標題
-          .post-title {
-            margin-bottom: 6px;
-            font-size: 1.4rem;
-            color: #fff;
-            transition: color .5s;
-
-            // 單行省略號
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        // 發表時間、更新時間、分類、標籤
+        span {
+          font: {
+            size: 16px;
+            weight: bold;
           }
-
-          // 發表時間、更新時間、分類、標籤
-          span {
-            font: {
-              size: 16px;
-              weight: bold;
-            }
-            color: #858585;
-          }
-
-          // 文章內容預覽
-          .post-content-preview {
-            margin: 6px 0 0 0;
-            font-size: 16px;
-
-            /* === 暫時 === */
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            // 限制在一個塊元素顯示的文本行數
-            -webkit-line-clamp: 3;
-            // 設定伸縮盒的子元素排列方式
-            -webkit-box-orient: vertical;
-          }
+          color: #858585;
         }
 
-        &:hover .post-info .post-title {
-          color: $theme-color;
+        // 文章內容預覽
+        .post-content-preview {
+          margin: 6px 0 0 0;
+          font-size: 16px;
+
+          /* === 暫時 === */
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          // 限制在一個塊元素顯示的文本行數
+          -webkit-line-clamp: 3;
+          // 設定伸縮盒的子元素排列方式
+          -webkit-box-orient: vertical;
         }
+      }
     }
 
   }
