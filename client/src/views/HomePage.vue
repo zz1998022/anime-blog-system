@@ -95,8 +95,8 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import dayjs from 'dayjs'
-import { loliGet } from '../utils/loli'
-import { TheNav, TheFooter } from '../components'
+import { loliGet } from '@/utils/loli'
+import { TheNav, TheFooter } from '@/components'
 
 export default defineComponent({
   name: 'HomePage',
@@ -118,7 +118,7 @@ export default defineComponent({
       pageNum: 1,
       pageSize: 10
     }).then(res => {
-      recentPost.value = res.data.map(item => {
+      recentPost.value = res.data.map((item: any) => { // 暫時 any
         // 格式化日期
         item.publishTime = dayjs(item.publishTime).format('YYYY/DD/MM')
         return item
@@ -133,7 +133,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/common';
+@import '@/styles/common';
 
 // 背景圖
 .main-background {

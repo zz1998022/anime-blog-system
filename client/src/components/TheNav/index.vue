@@ -37,7 +37,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/variable';
+@import '@/styles/variable';
 
 .nav {
   display: flex;

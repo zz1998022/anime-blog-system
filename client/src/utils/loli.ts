@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { message } from 'ant-design-vue'
-import { baseHost } from '../config'
+import { baseHost } from '@/config'
 
 const { DEV } = import.meta.env
 
