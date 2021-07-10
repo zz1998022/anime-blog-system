@@ -56,7 +56,7 @@
       <div class="card info-card">
         <!-- 頭像 名稱 簡介 -->
         <div class="info-card-avatar">
-          <a-avatar class="avatar" :size="110" src="/default/avatar.webp"></a-avatar>
+          <img class="avatar" src="/default/avatar.webp" alt="">
           <h2>NekoChan</h2>
           <h3>一位愛貓人士</h3>
         </div>
@@ -309,6 +309,9 @@ export default defineComponent({
       // 頭像 名稱 簡介
       .info-card-avatar {
         .avatar {
+          width: 110px;
+          height: 110px;
+          border-radius: 50%;
           transition: transform .5s;
 
           &:hover {
