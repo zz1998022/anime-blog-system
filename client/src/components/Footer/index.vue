@@ -38,5 +38,4 @@ export default defineComponent({
   box-shadow: rgba(245,122,122,0.4) 0px 0px 10px, rgba(245,122,122,0.4) 0px 0px 20px, rgba(245,122,122,0.4) 0px 0px 30px, rgba(245,122,122,0.5) 0px 0px 50px, rgba(245,122,122,0.6) 0px 0px 70px;
   user-select: none;
 }
-
 </style>

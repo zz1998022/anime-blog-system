@@ -104,5 +104,4 @@ export default defineComponent({
 .scrollDown {
   transform: translateY(-64px);
 }
-
 </style>
