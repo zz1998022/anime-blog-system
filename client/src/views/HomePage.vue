@@ -110,10 +110,7 @@ export default defineComponent({
   },
   setup() {
     /**
-     * TODO: 渲染請求前與請求後的各種情況
-     *      * 1 - 請求後的數據，可能沒有文章(長度為 0) : Done
-     *      * 2 - 數據可能還沒請求或正在請求，顯示讀取提示(但之後會改為 ssr)
-     * ?: 自訂義 Hook 函數分離業務邏輯
+     * TODO: 自訂義 Hook 函數分離業務邏輯
      */
     const recentPost = ref([]) // 請求數據
     const getRecentPost = ref(false) // 請求狀態
