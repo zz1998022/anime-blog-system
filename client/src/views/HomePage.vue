@@ -17,8 +17,8 @@
   <main class="main middle">
     <!-- 最近文章 -->
     <div class="recent-post">
-      <!-- 如果有文章 -->
-      <template v-if="recentPost.length > 0">
+      <!-- 請求完成、有文章 -->
+      <template v-if="getRecentPost && recentPost.length > 0">
         <template v-for="post in recentPost" :key="post.id">
           <a class="card recent-post-card" href="#">
             <!-- 文章封面 -->
@@ -40,9 +40,13 @@
           </a>
         </template>
       </template>
-      <!-- 如果沒有文章 -->
-      <template v-else-if="recentPost.length === 0">
+      <!-- 請求完成、沒有文章 -->
+      <template v-else-if="getRecentPost && recentPost.length === 0">
         <div class="card no-post">這裡什麼文章都沒有，<br />大家可以回家了。</div>
+      </template>
+      <!-- 請求尚未完成 -->
+      <template v-else-if="!getRecentPost">
+        <div class="card no-post">文章請求中...</div>
       </template>
       <!-- 其他狀況 -->
       <template v-else>
@@ -111,22 +115,27 @@ export default defineComponent({
      *      * 2 - 數據可能還沒請求或正在請求，顯示讀取提示(但之後會改為 ssr)
      * ?: 自訂義 Hook 函數分離業務邏輯
      */
-    const recentPost = ref([])
+    const recentPost = ref([]) // 請求數據
+    const getRecentPost = ref(false) // 請求狀態
 
     // 請求最近文章
     loliGet('/article/recently/', {
       pageNum: 1,
       pageSize: 10
     }).then(res => {
+      // 請求成功
+      getRecentPost.value = true
+
+      // 格式化日期
       recentPost.value = res.data.map((item: any) => { // 暫時 any
-        // 格式化日期
         item.publishTime = dayjs(item.publishTime).format('YYYY/DD/MM')
         return item
       })
     })
 
     return {
-      recentPost
+      recentPost,
+      getRecentPost
     }
   }
 })
