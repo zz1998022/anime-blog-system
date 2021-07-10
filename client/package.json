@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "ant-design-vue": "^2.2.0-rc.1",
