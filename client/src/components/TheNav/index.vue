@@ -24,7 +24,7 @@ import { defineComponent } from 'vue'
 import useScroll from './hooks/useScroll'
 
 export default defineComponent({
-  name: 'Nav',
+  name: 'NekoNav',
   setup() {
     const { isScrolled, isScrollDown } = useScroll()
 

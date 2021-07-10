@@ -1,7 +1,7 @@
-import Nav from './Nav/index.vue'
-import Footer from './Footer/index.vue'
+import TheNav from './TheNav/index.vue'
+import TheFooter from './TheFooter/index.vue'
 
 export {
-  Nav,
-  Footer
+  TheNav,
+  TheFooter
 }

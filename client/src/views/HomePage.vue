@@ -2,7 +2,7 @@
   <!-- 頭部 -->
   <header>
     <!-- 導航條 -->
-    <Nav />
+    <TheNav />
 
     <!-- 背景圖與標題 -->
     <a-layout-content class="main-background">
@@ -89,20 +89,20 @@
   </main>
 
   <!-- 底部 -->
-  <Footer />
+  <TheFooter />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import dayjs from 'dayjs'
 import { loliGet } from '../utils/loli'
-import { Nav, Footer } from '../components/'
+import { TheNav, TheFooter } from '../components'
 
 export default defineComponent({
-  name: 'Home',
+  name: 'HomePage',
   components: {
-    Nav,
-    Footer
+    TheNav,
+    TheFooter
   },
   setup() {
     /**
