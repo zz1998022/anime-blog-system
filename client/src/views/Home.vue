@@ -17,8 +17,10 @@
   <main class="main middle">
     <!-- 最近文章 -->
     <div class="recent-post">
-      <template v-for="post in recentPost" :key="post.id">
-        <a class="card recent-post-card" href="#">
+      <!-- 如果有文章 -->
+      <template v-if="recentPost.length > 0">
+        <template v-for="post in recentPost" :key="post.id">
+          <a class="card recent-post-card" href="#">
             <!-- 文章封面 -->
             <div class="post-card-picture">
               <img :src="post.picture" loading="lazy">
@@ -35,7 +37,16 @@
               <span v-if="post.tag"> | {{ post.tag }}</span>
               <p class="post-content-preview">{{ post.content }}</p>
             </div>
-        </a>
+          </a>
+        </template>
+      </template>
+      <!-- 如果沒有文章 -->
+      <template v-else-if="recentPost.length === 0">
+        <div class="card no-post">這裡什麼文章都沒有，<br />大家可以回家了。</div>
+      </template>
+      <!-- 其他狀況 -->
+      <template v-else>
+        <div class="card no-post">看看你幹了什麼，<br />我連最近文章的數量都偵測不到了。</div>
       </template>
     </div>
 
@@ -94,8 +105,15 @@ export default defineComponent({
     Footer
   },
   setup() {
+    /**
+     * TODO: 渲染請求前與請求後的各種情況
+     *      * 1 - 請求後的數據，可能沒有文章(長度為 0) : Done
+     *      * 2 - 數據可能還沒請求或正在請求，顯示讀取提示(但之後會改為 ssr)
+     * ?: 自訂義 Hook 函數分離業務邏輯
+     */
     const recentPost = ref([])
 
+    // 請求最近文章
     loliGet('/article/recently/', {
       pageNum: 1,
       pageSize: 10
@@ -266,6 +284,12 @@ export default defineComponent({
       }
     }
 
+    // 沒有文章
+    .no-post {
+      padding: 2rem;
+      text-align: center;
+      font-size: 2rem;
+    }
   }
 
   // 側邊資訊
