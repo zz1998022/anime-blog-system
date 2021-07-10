@@ -4,7 +4,6 @@ import { Layout, Typography, Menu } from 'ant-design-vue'
 import App from './App.vue'
 
 createApp(App)
-  // 路由
   .use(router)
 
   // Ant Design Vue
