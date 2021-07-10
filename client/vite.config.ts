@@ -7,12 +7,12 @@ import { resolve } from 'path'
 export default defineConfig({
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
-    }
+      '@': resolve(__dirname, 'src'),
+    },
   },
   server: {
     port: 6969,
-    open: '/'
+    open: '/',
   },
   plugins: [
     vue(),
@@ -23,9 +23,9 @@ export default defineConfig({
           esModule: true,
           resolveStyle: name => {
             return `ant-design-vue/es/${name}/style/index`
-          }
-        }
-      ]
+          },
+        },
+      ],
     }),
   ],
   css: {
@@ -34,10 +34,10 @@ export default defineConfig({
         modifyVars: {
           // Ant Design Vue 自訂主題
           'primary-color': '#ff0072',
-          'border-radius-base': '15px'
+          'border-radius-base': '15px',
         },
-        javascriptEnabled: true
-      }
-    }
-  }
+        javascriptEnabled: true,
+      },
+    },
+  },
 })

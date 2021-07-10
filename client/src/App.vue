@@ -6,7 +6,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'App'
+  name: 'App',
 })
 </script>
 
@@ -47,7 +47,7 @@ html {
     content: '';
     height: 100%;
     width: 100%;
-    background-color: rgba($color: #000, $alpha: .2);
+    background-color: rgba($color: #000, $alpha: 0.2);
     pointer-events: none;
   }
 }

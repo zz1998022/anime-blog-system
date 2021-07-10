@@ -1,7 +1,6 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import _throttle from 'lodash/throttle'
 
-
 export default function () {
   const setupScrollValue = document.documentElement.scrollTop // setup 時的 scrollTop
   const isScrolled = ref(setupScrollValue !== 0) // 是否滾動（不為 0
@@ -39,6 +38,6 @@ export default function () {
 
   return {
     isScrolled,
-    isScrollDown
+    isScrollDown,
   }
 }

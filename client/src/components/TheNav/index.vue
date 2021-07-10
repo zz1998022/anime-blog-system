@@ -1,5 +1,8 @@
 <template>
-  <a-layout-header class="nav" :class="{ scrolled: isScrolled, scrollDown: isScrollDown }">
+  <a-layout-header
+    class="nav"
+    :class="{ scrolled: isScrolled, scrollDown: isScrollDown }"
+  >
     <a href="#">
       <a-typography-title class="title" :level="4">
         NekoChan
@@ -30,9 +33,9 @@ export default defineComponent({
 
     return {
       isScrolled,
-      isScrollDown
+      isScrollDown,
     }
-  }
+  },
 })
 </script>
 
@@ -49,13 +52,13 @@ export default defineComponent({
   border-radius: 0;
   font-weight: 900;
   background-color: transparent;
-  transition: all .3s;
+  transition: all 0.3s;
   user-select: none;
 
   .title {
     margin: 0;
-    color: rgba($color: #fff, $alpha: .7);
-    transition: color .3s;
+    color: rgba($color: #fff, $alpha: 0.7);
+    transition: color 0.3s;
 
     &:hover {
       color: #fff;
@@ -67,11 +70,11 @@ export default defineComponent({
     justify-content: flex-end;
     border-bottom: none;
     background-color: transparent;
-    font-size: .8rem;
-    text-shadow: 1px 1px 1px rgba($color: #000, $alpha: .3);
+    font-size: 0.8rem;
+    text-shadow: 1px 1px 1px rgba($color: #000, $alpha: 0.3);
 
     .item a {
-      color: rgba($color: #fff, $alpha: .7);
+      color: rgba($color: #fff, $alpha: 0.7);
 
       &:hover {
         color: #fff;
@@ -82,10 +85,10 @@ export default defineComponent({
 
 .scrolled {
   border-bottom: none;
-  background-color: rgba($color: #000000, $alpha: .7);
+  background-color: rgba($color: #000000, $alpha: 0.7);
 
   .title {
-    color: rgba($color: #fff, $alpha: .7);
+    color: rgba($color: #fff, $alpha: 0.7);
 
     &:hover {
       color: $theme-color;
@@ -93,7 +96,7 @@ export default defineComponent({
   }
 
   .menu .item a {
-    color: rgba($color: #fff, $alpha: .7);
+    color: rgba($color: #fff, $alpha: 0.7);
 
     &:hover {
       color: $theme-color;

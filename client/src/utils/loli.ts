@@ -10,14 +10,14 @@ const loli = axios.create({
   timeout: 7000,
   maxContentLength: 2000,
   headers: {
-    'Content-Type': 'application/json;charset=UTF-8'
-  }
+    'Content-Type': 'application/json;charset=UTF-8',
+  },
 })
 
 loli.interceptors.request.use(
   (config): any => {
     const token = window.localStorage.getItem('token')
-    if (token) (config.headers['Token'] = token)
+    if (token) config.headers['Token'] = token
     return config
   },
   error => Promise.reject(error)
@@ -93,13 +93,14 @@ loli.defaults.baseURL = DEV ? baseHost.API1.dev_host : baseHost.API1.pro_host
  * @param path  - 請求路徑
  * @param params - 請求參數
  */
- export const loliGet = async (path: string, params?: object) => {
+export const loliGet = async (path: string, params?: object) => {
   try {
     console.log(`get ${loli.defaults.baseURL}${path}`)
     const response = await loli.get(path, { params })
     return response.data
-
-  } catch (err) { throw new Error(err) }
+  } catch (err) {
+    throw new Error(err)
+  }
 }
 
 /**
@@ -107,13 +108,14 @@ loli.defaults.baseURL = DEV ? baseHost.API1.dev_host : baseHost.API1.pro_host
  * @param path  - 請求路徑
  * @param params - 請求參數
  */
- export const loliPost = async (path: string, params?: object) => {
+export const loliPost = async (path: string, params?: object) => {
   try {
     console.log(`post ${loli.defaults.baseURL}${path}`)
     const response = await loli.post(path, { params })
     return response.data
-
-  } catch (err) { throw new Error(err) }
+  } catch (err) {
+    throw new Error(err)
+  }
 }
 
 /**
@@ -121,13 +123,14 @@ loli.defaults.baseURL = DEV ? baseHost.API1.dev_host : baseHost.API1.pro_host
  * @param path  - 請求路徑
  * @param params - 請求參數
  */
- export const loliPut = async (path: string, params?: object) => {
+export const loliPut = async (path: string, params?: object) => {
   try {
     console.log(`put ${loli.defaults.baseURL}${path}`)
     const response = await loli.put(path, { params })
     return response.data
-
-  } catch (err) { throw new Error(err) }
+  } catch (err) {
+    throw new Error(err)
+  }
 }
 
 /**
@@ -135,11 +138,12 @@ loli.defaults.baseURL = DEV ? baseHost.API1.dev_host : baseHost.API1.pro_host
  * @param path  - 請求路徑
  * @param params - 請求參數
  */
- export const loliDelete = async (path: string, params?: object) => {
+export const loliDelete = async (path: string, params?: object) => {
   try {
     console.log(`delete ${loli.defaults.baseURL}${path}`)
     const response = await loli.delete(path, { data: params })
     return response.data
-
-  } catch (err) { throw new Error(err) }
+  } catch (err) {
+    throw new Error(err)
+  }
 }

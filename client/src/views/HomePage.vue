@@ -8,7 +8,7 @@
     <a-layout-content class="main-background">
       <div class="title-container">
         <h2 class="main-title">NekoChan</h2>
-        <h3 class="sub-title">愛貓就不要％貓 </h3>
+        <h3 class="sub-title">愛貓就不要％貓</h3>
       </div>
     </a-layout-content>
   </header>
@@ -23,7 +23,7 @@
           <a class="card recent-post-card" href="#">
             <!-- 文章封面 -->
             <div class="post-card-picture">
-              <img :src="post.picture" loading="lazy">
+              <img :src="post.picture" loading="lazy" />
             </div>
 
             <!-- 文章資訊 -->
@@ -32,7 +32,9 @@
                 {{ post.title }}
               </h3>
               <span>發表於 {{ post.publishTime }}</span>
-              <span v-if="post.updateTime"> | 更新於 {{ post.updateTime }}</span>
+              <span v-if="post.updateTime">
+                | 更新於 {{ post.updateTime }}</span
+              >
               <span v-if="post.category"> | {{ post.category }}</span>
               <span v-if="post.tag"> | {{ post.tag }}</span>
               <p class="post-content-preview">{{ post.content }}</p>
@@ -42,7 +44,9 @@
       </template>
       <!-- 請求完成、沒有文章 -->
       <template v-else-if="getRecentPost && recentPost.length === 0">
-        <div class="card no-post">這裡什麼文章都沒有，<br />大家可以回家了。</div>
+        <div class="card no-post">
+          這裡什麼文章都沒有，<br />大家可以回家了。
+        </div>
       </template>
       <!-- 請求尚未完成 -->
       <template v-else-if="!getRecentPost">
@@ -50,7 +54,9 @@
       </template>
       <!-- 其他狀況 -->
       <template v-else>
-        <div class="card no-post">看看你幹了什麼，<br />我連最近文章的數量都偵測不到了。</div>
+        <div class="card no-post">
+          看看你幹了什麼，<br />我連最近文章的數量都偵測不到了。
+        </div>
       </template>
     </div>
 
@@ -60,7 +66,7 @@
       <div class="card info-card">
         <!-- 頭像 名稱 簡介 -->
         <div class="info-card-avatar">
-          <img class="avatar" src="/default/avatar.webp" alt="">
+          <img class="avatar" src="/default/avatar.webp" alt="" />
           <h2>NekoChan</h2>
           <h3>一位愛貓人士</h3>
         </div>
@@ -106,7 +112,7 @@ export default defineComponent({
   name: 'HomePage',
   components: {
     TheNav,
-    TheFooter
+    TheFooter,
   },
   setup() {
     /**
@@ -119,13 +125,14 @@ export default defineComponent({
     // 請求最近文章
     loliGet('/article/recently/', {
       pageNum: 1,
-      pageSize: 10
+      pageSize: 10,
     }).then(res => {
       // 請求成功
       getRecentPost.value = true
 
       // 格式化日期
-      recentPost.value = res.data.map((item: any) => { // 暫時 any
+      recentPost.value = res.data.map((item: any) => {
+        // 暫時 any
         item.publishTime = dayjs(item.publishTime).format('YYYY/DD/MM')
         return item
       })
@@ -133,9 +140,9 @@ export default defineComponent({
 
     return {
       recentPost,
-      getRecentPost
+      getRecentPost,
     }
-  }
+  },
 })
 </script>
 
@@ -161,7 +168,7 @@ export default defineComponent({
   &::before {
     content: '';
     position: absolute;
-    background-color: rgba($color: #000, $alpha: .3);
+    background-color: rgba($color: #000, $alpha: 0.3);
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -170,7 +177,7 @@ export default defineComponent({
   // 標題容器
   .title-container {
     position: relative;
-    top: -.5rem;
+    top: -0.5rem;
     text-align: center;
     user-select: none;
 
@@ -178,7 +185,10 @@ export default defineComponent({
     .main-title {
       margin-bottom: 0;
       color: #fff;
-      text-shadow: rgb(255 255 255 / 40%) 0 0 10px, rgb(255 255 255 / 40%) 0 0 20px, rgb(255 255 255 / 40%) 0 0 30px, rgb(255 255 0 / 40%) 0 0 40px, rgb(255 255 0 / 40%) 0 0 70px, rgb(255 255 0 / 40%) 0 0 80px;
+      text-shadow: rgb(255 255 255 / 40%) 0 0 10px,
+        rgb(255 255 255 / 40%) 0 0 20px, rgb(255 255 255 / 40%) 0 0 30px,
+        rgb(255 255 0 / 40%) 0 0 40px, rgb(255 255 0 / 40%) 0 0 70px,
+        rgb(255 255 0 / 40%) 0 0 80px;
       font: {
         size: 2.2rem;
         weight: 600;
@@ -188,7 +198,9 @@ export default defineComponent({
     // 副標題
     .sub-title {
       color: #fff;
-      text-shadow: rgb(255 255 255 / 80%) 0 0 10px, rgb(255 255 255 / 80%) 0 0 20px, rgb(255 255 255 / 80%) 0 0 30px, rgb(255 0 102 / 80%) 0 0 40px, rgb(255 0 102 / 80%) 0 0 70px;
+      text-shadow: rgb(255 255 255 / 80%) 0 0 10px,
+        rgb(255 255 255 / 80%) 0 0 20px, rgb(255 255 255 / 80%) 0 0 30px,
+        rgb(255 0 102 / 80%) 0 0 40px, rgb(255 0 102 / 80%) 0 0 70px;
       font: {
         size: 1.2rem;
         weight: 500;
@@ -238,7 +250,7 @@ export default defineComponent({
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform .6s;
+          transition: transform 0.6s;
 
           // 縮放封面
           &:hover {
@@ -257,7 +269,7 @@ export default defineComponent({
           margin-bottom: 6px;
           font-size: 1.4rem;
           color: #fff;
-          transition: color .5s;
+          transition: color 0.5s;
 
           // 單行省略號
           white-space: nowrap;
@@ -319,7 +331,7 @@ export default defineComponent({
           width: 110px;
           height: 110px;
           border-radius: 50%;
-          transition: transform .5s;
+          transition: transform 0.5s;
 
           &:hover {
             transform: scale(1.1) rotate(360deg);
@@ -361,7 +373,7 @@ export default defineComponent({
             color: #fff;
 
             .headline {
-              font-size: .8rem;
+              font-size: 0.8rem;
             }
 
             .length-num {
