@@ -160,7 +160,7 @@ export default defineComponent({
             subTitle.value = subTitle.value.split('').slice(0, -1).join('')
             // 重置
             if (i === subTitleDataLen - 1)
-              setTimeout(() => handelSubTitle(), 500)
+              setTimeout(_ => handelSubTitle(), 500)
           }, (i * typeSpeed) / 3)
         }
       })
