@@ -8,7 +8,7 @@
     <a-layout-content class="main-background">
       <div class="title-container">
         <h2 class="main-title">NekoChan</h2>
-        <h3 class="sub-title">愛貓就不要％貓</h3>
+        <h3 class="sub-title">{{ subTitle }}</h3>
       </div>
     </a-layout-content>
   </header>
@@ -103,7 +103,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import dayjs from 'dayjs'
 import { loliGet } from '@/utils/loli'
 import { TheNav, TheFooter } from '@/components'
@@ -138,9 +138,42 @@ export default defineComponent({
       })
     })
 
+    const subTitle = ref('') // 副標題
+    const typeSpeed = 300 // 副標題 打字效果速度 (毫秒)
+    const subTitleData = '愛貓就不要％貓' // 暫時的假數據（這裡應該要是從後台拿的）
+    const subTitleDataLen = subTitleData.length
+
+    // 副標題打字效果
+    function handelSubTitle() {
+      new Promise(resolve => {
+        // 輸入
+        for (let i = 0; i < subTitleDataLen; i++) {
+          setTimeout(_ => {
+            subTitle.value += subTitleData[i]
+            if (i === subTitleDataLen - 1) setTimeout(() => resolve(null), 500)
+          }, i * typeSpeed)
+        }
+      }).then(_ => {
+        // 刪除
+        for (let i = 0; i < subTitleDataLen; i++) {
+          setTimeout(_ => {
+            subTitle.value = subTitle.value.split('').slice(0, -1).join('')
+            // 重置
+            if (i === subTitleDataLen - 1)
+              setTimeout(() => handelSubTitle(), 500)
+          }, (i * typeSpeed) / 3)
+        }
+      })
+    }
+
+    onMounted(() => {
+      handelSubTitle()
+    })
+
     return {
       recentPost,
       getRecentPostStatus,
+      subTitle,
     }
   },
 })
@@ -178,6 +211,7 @@ export default defineComponent({
   .title-container {
     position: relative;
     top: -0.5rem;
+    height: 10rem;
     text-align: center;
     user-select: none;
 
@@ -197,10 +231,15 @@ export default defineComponent({
 
     // 副標題
     .sub-title {
+      display: inline-block;
+      height: 1.2rem;
+      border-right: solid 0.2rem #fff;
+      padding-right: 0.3rem;
       color: #fff;
       text-shadow: rgb(255 255 255 / 80%) 0 0 10px,
         rgb(255 255 255 / 80%) 0 0 20px, rgb(255 255 255 / 80%) 0 0 30px,
         rgb(255 0 102 / 80%) 0 0 40px, rgb(255 0 102 / 80%) 0 0 70px;
+      line-height: 100%;
       font: {
         size: 1.2rem;
         weight: 500;
