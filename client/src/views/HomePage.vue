@@ -139,7 +139,8 @@ export default defineComponent({
     })
 
     const subTitle = ref('') // 副標題
-    const typeSpeed = 300 // 副標題 打字效果速度 (毫秒)
+    const typeSpeed = 300 // 副標題 輸入速度 (毫秒)
+    const deleteSpeed = 3 // 副標題 刪除速度 (倍)
     const subTitleData = '愛貓就不要％貓' // 暫時的假數據（這裡應該要是從後台拿的）
     const subTitleDataLen = subTitleData.length
 
@@ -150,7 +151,7 @@ export default defineComponent({
         for (let i = 0; i < subTitleDataLen; i++) {
           setTimeout(_ => {
             subTitle.value += subTitleData[i]
-            if (i === subTitleDataLen - 1) setTimeout(() => resolve(null), 500)
+            if (i === subTitleDataLen - 1) setTimeout(_ => resolve(null), 500)
           }, i * typeSpeed)
         }
       }).then(_ => {
@@ -161,7 +162,7 @@ export default defineComponent({
             // 重置
             if (i === subTitleDataLen - 1)
               setTimeout(_ => handelSubTitle(), 500)
-          }, (i * typeSpeed) / 3)
+          }, (i * typeSpeed) / deleteSpeed)
         }
       })
     }
