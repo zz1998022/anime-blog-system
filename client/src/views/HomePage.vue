@@ -116,14 +116,14 @@ export default defineComponent({
   },
   setup() {
     /**
-     * TODO: 最近文章翻頁
-     * ?: 自訂義 Hook 函數分離業務邏輯
+     * TODO: 自訂義 Hook 函數分離業務邏輯
+     * ?: 最近文章翻頁 (需要後端接口，首頁的基本資料："文章總數"、分類數量、標籤數量、標題...)
      */
     const recentPost = ref([]) // 請求數據
     const getRecentPostStatus = ref(false) // 請求狀態
 
     // 請求最近文章
-    loliGet('/article/recently/', {
+    loliGet('/article/recently/', { // 應該要寫到 api 資料夾裡，然後傳入參數就好
       pageNum: 1,
       pageSize: 10,
     }).then(res => {
@@ -131,18 +131,24 @@ export default defineComponent({
       getRecentPostStatus.value = true
 
       // 格式化日期
-      recentPost.value = res.data.map((item: any) => {
-        // 暫時 any
+      recentPost.value = res.data.map((item: { publishTime: string }) => {
         item.publishTime = dayjs(item.publishTime).format('YYYY/DD/MM')
         return item
       })
     })
 
     const subTitle = ref('') // 副標題
-    const typeSpeed = 300 // 副標題 輸入速度 (毫秒)
-    const deleteSpeed = 3 // 副標題 刪除速度 (倍)
-    const subTitleData = '愛貓就不要％貓' // 暫時的假數據（這裡應該要是從後台拿的）
+    const config = { // 這個之後也是從接口拿（因為之後會有後台管理可以自訂該 config
+      type: 200, // 輸入速度 (毫秒)
+      delete: 50, // 刪除速度 (毫秒)
+      switch: 1500, // 從 輸入完成 到 開始刪除 的間隔 (毫秒)
+      next: 300, // 刪除完成後 切換到 下一個副標題　的間隔 (毫秒)
+    }
+    const subTitleData = '愛貓就不要％貓' // 暫時假數據（應該要是從接口拿的）
     const subTitleDataLen = subTitleData.length
+
+    // TODO: 輸入完成 到 開始刪除 的間隔 添加一個 class 讓 光標有閃爍的動畫
+    // TODO: 支援 array 類型，兩種模式：順序、隨機
 
     // 副標題打字效果
     function handelSubTitle() {
@@ -151,18 +157,18 @@ export default defineComponent({
         for (let i = 0; i < subTitleDataLen; i++) {
           setTimeout(_ => {
             subTitle.value += subTitleData[i]
-            if (i === subTitleDataLen - 1) setTimeout(_ => resolve(null), 500)
-          }, i * typeSpeed)
+            if (i === subTitleDataLen - 1) setTimeout(_ => resolve(null), config.switch)
+          }, i * config.type)
         }
       }).then(_ => {
         // 刪除
         for (let i = 0; i < subTitleDataLen; i++) {
           setTimeout(_ => {
             subTitle.value = subTitle.value.split('').slice(0, -1).join('')
-            // 重置
+            // 下一個
             if (i === subTitleDataLen - 1)
-              setTimeout(_ => handelSubTitle(), 500)
-          }, (i * typeSpeed) / deleteSpeed)
+              setTimeout(_ => handelSubTitle(), config.next)
+          }, (i * config.delete))
         }
       })
     }
