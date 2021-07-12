@@ -22,8 +22,9 @@ jobs:
 
       - name: 推送 dev-client-gh-pages
         uses: s0/git-publish-subdir-action@develop
+        working-directory: ./client
         env:
           REPO: self
           BRANCH: dev-client-gh-pages
-          FOLDER: /client/dist
+          FOLDER: dist
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
