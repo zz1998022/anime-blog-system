@@ -1,0 +1,17 @@
+name: build client
+
+on:
+  push:
+    branches:
+      - dev
+    path:
+      - client
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    steps:
+        run: |
+          yarn
+          yarn build
+        working-directory: ./client
