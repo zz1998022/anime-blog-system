@@ -45,7 +45,7 @@ loli.interceptors.response.use(
     // 处理错误时的状态码信息
     switch (response.status) {
       case 401: // 没有被授权
-        setTimeout(_ => {
+        setTimeout(() => {
           message.warning('登入超時請重新登入')
           window.location.replace('/')
         }, 100)
@@ -73,7 +73,7 @@ loli.interceptors.response.use(
 
     // 创建一个新的 Promise 来处理 exponential backoff
     let backoff = new Promise(resolve => {
-      setTimeout(_ => {
+      setTimeout(() => {
         resolve(null)
       }, config.retryDelay || 1)
     })
