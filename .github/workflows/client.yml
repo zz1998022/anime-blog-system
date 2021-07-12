@@ -1,4 +1,4 @@
-name: build client
+name: 測試構建 Client
 
 on:
   push:
@@ -13,9 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: borales/actions-yarn@v2.3.0
-      - name: Install Package
+
+      - name: 安裝 Package
         working-directory: ./client
         run: yarn
-      - name: Build Client
+
+      - name: 構建 Client
         working-directory: ./client
         run: yarn build
