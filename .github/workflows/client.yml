@@ -1,10 +1,10 @@
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - dev
-    paths:
-      - client/**
+  # push:
+  #   branches:
+  #     - dev
+  #   paths:
+  #     - client/**
 
 jobs:
   client:
