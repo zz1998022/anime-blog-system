@@ -79,7 +79,7 @@ loli.interceptors.response.use(
     })
 
     // return the promise in which  recalls axios to retry the request
-    return backoff.then(_ => {
+    return backoff.then(() => {
       return loli(config)
     })
   }
