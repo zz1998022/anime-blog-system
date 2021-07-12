@@ -1,4 +1,5 @@
 on:
+  workflow_dispatch:
   push:
     branches:
       - dev
@@ -22,7 +23,7 @@ jobs:
 
       - name: 推送 dev-client-gh-pages
         uses: s0/git-publish-subdir-action@develop
-        working-directory: ./client
+        run: ls
         env:
           REPO: self
           BRANCH: dev-client-gh-pages
