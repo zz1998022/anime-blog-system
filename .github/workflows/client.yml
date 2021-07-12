@@ -11,8 +11,9 @@ jobs:
   client:
     runs-on: ubuntu-latest
     steps:
-        - name: yarn build
-          run: |
-            yarn
-            yarn build
-          working-directory: client
+      - name: Install Package
+        working-directory: ./client
+        run: yarn
+      - name: Build Client
+        working-directory: ./client
+        run: yarn build
