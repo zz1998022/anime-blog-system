@@ -109,14 +109,14 @@ import { loliGet } from '@/utils/loli'
 import { TheNav, TheFooter } from '@/components'
 
 interface Post {
-  id: number;
-  title: string;
-  content: string;
-  publishTime: string;
-  updateTime?: string;
-  category?: string;
-  tag?: string;
-  picture?: string;
+  id: number
+  title: string
+  content: string
+  publishTime: string
+  updateTime?: string
+  category?: string
+  tag?: string
+  picture?: string
 }
 
 export default defineComponent({
@@ -134,7 +134,8 @@ export default defineComponent({
     const getRecentPostStatus = ref(false) // 請求狀態
 
     // 請求最近文章
-    loliGet('/article/recently/', { // 應該要寫到 api 資料夾裡，然後傳入參數就好
+    loliGet('/article/recently/', {
+      // 應該要寫到 api 資料夾裡，然後傳入參數就好
       pageNum: 1,
       pageSize: 10,
     }).then((res: { data: Post[] }) => {
@@ -149,7 +150,8 @@ export default defineComponent({
     })
 
     const subTitle = ref('') // 副標題
-    const config = { // 這個之後也是從接口拿（因為之後會有後台管理可以自訂該 config
+    const config = {
+      // 這個之後也是從接口拿（因為之後會有後台管理可以自訂該 config
       type: 200, // 輸入速度 (毫秒)
       delete: 50, // 刪除速度 (毫秒)
       switch: 1500, // 從 輸入完成 到 開始刪除 的間隔 (毫秒)
@@ -168,7 +170,8 @@ export default defineComponent({
         for (let i = 0; i < subTitleDataLen; i++) {
           setTimeout(() => {
             subTitle.value += subTitleData[i]
-            if (i === subTitleDataLen - 1) setTimeout(() => resolve(null), config.switch)
+            if (i === subTitleDataLen - 1)
+              setTimeout(() => resolve(null), config.switch)
           }, i * config.type)
         }
       }).then(() => {
@@ -179,7 +182,7 @@ export default defineComponent({
             // 下一個
             if (i === subTitleDataLen - 1)
               setTimeout(() => handelSubTitle(), config.next)
-          }, (i * config.delete))
+          }, i * config.delete)
         }
       })
     }
