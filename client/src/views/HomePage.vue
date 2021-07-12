@@ -32,9 +32,7 @@
                 {{ post.title }}
               </h3>
               <span>發表於 {{ post.publishTime }}</span>
-              <span v-if="post.updateTime">
-                | 更新於 {{ post.updateTime }}</span
-              >
+              <span v-if="post.updateTime"> | 更新於 {{ post.updateTime }}</span>
               <span v-if="post.category"> | {{ post.category }}</span>
               <span v-if="post.tag"> | {{ post.tag }}</span>
               <p class="post-content-preview">{{ post.content }}</p>
@@ -44,9 +42,7 @@
       </template>
       <!-- 請求完成、沒有文章 -->
       <template v-else-if="getRecentPostStatus && recentPost.length === 0">
-        <div class="card no-post">
-          這裡什麼文章都沒有，<br />大家可以回家了。
-        </div>
+        <div class="card no-post">這裡什麼文章都沒有，<br />大家可以回家了。</div>
       </template>
       <!-- 請求尚未完成 -->
       <template v-else-if="!getRecentPostStatus">
@@ -54,9 +50,7 @@
       </template>
       <!-- 其他狀況 -->
       <template v-else>
-        <div class="card no-post">
-          看看你幹了什麼，<br />我連最近文章的數量都偵測不到了。
-        </div>
+        <div class="card no-post">看看你幹了什麼，<br />我連最近文章的數量都偵測不到了。</div>
       </template>
     </div>
 
@@ -170,8 +164,7 @@ export default defineComponent({
         for (let i = 0; i < subTitleDataLen; i++) {
           setTimeout(() => {
             subTitle.value += subTitleData[i]
-            if (i === subTitleDataLen - 1)
-              setTimeout(() => resolve(null), config.switch)
+            if (i === subTitleDataLen - 1) setTimeout(() => resolve(null), config.switch)
           }, i * config.type)
         }
       }).then(() => {
@@ -180,8 +173,7 @@ export default defineComponent({
           setTimeout(() => {
             subTitle.value = subTitle.value.split('').slice(0, -1).join('')
             // 下一個
-            if (i === subTitleDataLen - 1)
-              setTimeout(() => handelSubTitle(), config.next)
+            if (i === subTitleDataLen - 1) setTimeout(() => handelSubTitle(), config.next)
           }, i * config.delete)
         }
       })
@@ -240,10 +232,8 @@ export default defineComponent({
     .main-title {
       margin-bottom: 0;
       color: #fff;
-      text-shadow: rgb(255 255 255 / 40%) 0 0 10px,
-        rgb(255 255 255 / 40%) 0 0 20px, rgb(255 255 255 / 40%) 0 0 30px,
-        rgb(255 255 0 / 40%) 0 0 40px, rgb(255 255 0 / 40%) 0 0 70px,
-        rgb(255 255 0 / 40%) 0 0 80px;
+      text-shadow: rgb(255 255 255 / 40%) 0 0 10px, rgb(255 255 255 / 40%) 0 0 20px, rgb(255 255 255 / 40%) 0 0 30px,
+        rgb(255 255 0 / 40%) 0 0 40px, rgb(255 255 0 / 40%) 0 0 70px, rgb(255 255 0 / 40%) 0 0 80px;
       font: {
         size: 2.2rem;
         weight: 600;
@@ -257,8 +247,7 @@ export default defineComponent({
       border-right: solid 0.2rem #fff;
       padding-right: 0.3rem;
       color: #fff;
-      text-shadow: rgb(255 255 255 / 80%) 0 0 10px,
-        rgb(255 255 255 / 80%) 0 0 20px, rgb(255 255 255 / 80%) 0 0 30px,
+      text-shadow: rgb(255 255 255 / 80%) 0 0 10px, rgb(255 255 255 / 80%) 0 0 20px, rgb(255 255 255 / 80%) 0 0 30px,
         rgb(255 0 102 / 80%) 0 0 40px, rgb(255 0 102 / 80%) 0 0 70px;
       line-height: 100%;
       font: {

@@ -1,12 +1,7 @@
 <template>
-  <a-layout-header
-    class="nav"
-    :class="{ scrolled: isScrolled, scrollDown: isScrollDown }"
-  >
+  <a-layout-header class="nav" :class="{ scrolled: isScrolled, scrollDown: isScrollDown }">
     <a href="#">
-      <a-typography-title class="title" :level="4">
-        NekoChan
-      </a-typography-title>
+      <a-typography-title class="title" :level="4">NekoChan</a-typography-title>
     </a>
     <a-menu class="menu" mode="horizontal">
       <a-menu-item class="item" key="test1">

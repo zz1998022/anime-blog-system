@@ -35,9 +35,8 @@ export default defineComponent({
   background: linear-gradient(-45deg, #ee7752, #ce3e75, #ff5c5c, #fd589d);
   background-size: 400% 400%;
   animation: Gradient 10s ease infinite;
-  box-shadow: rgba(245, 122, 122, 0.4) 0px 0px 10px,
-    rgba(245, 122, 122, 0.4) 0px 0px 20px, rgba(245, 122, 122, 0.4) 0px 0px 30px,
-    rgba(245, 122, 122, 0.5) 0px 0px 50px, rgba(245, 122, 122, 0.6) 0px 0px 70px;
+  box-shadow: rgba(245, 122, 122, 0.4) 0px 0px 10px, rgba(245, 122, 122, 0.4) 0px 0px 20px,
+    rgba(245, 122, 122, 0.4) 0px 0px 30px, rgba(245, 122, 122, 0.5) 0px 0px 50px, rgba(245, 122, 122, 0.6) 0px 0px 70px;
   user-select: none;
 }
 </style>
