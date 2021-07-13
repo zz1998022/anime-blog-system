@@ -1,4 +1,5 @@
-import TheNav from './TheNav.vue'
-import TheFooter from './TheFooter.vue'
+import TheLoading from './TheLoading/index.vue'
+import TheNav from './TheNav/index.vue'
+import TheFooter from './TheFooter/index.vue'
 
-export { TheNav, TheFooter }
+export { TheLoading, TheNav, TheFooter }

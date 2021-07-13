@@ -1,9 +1,6 @@
 import { onMounted, ref } from 'vue'
-// 引入dayjs
 import dayjs from 'dayjs'
-// 引入http工具
 import { loliGet } from '@/utils/loli'
-// 引入api
 import { homePage } from '@/api'
 
 interface Post {

@@ -99,10 +99,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { TheNav, TheFooter } from '@/components'
-// 引入获取数据方法
-import { useGetRecentPost } from './useGetRecentPost'
-// 引入获取标题方法
-import { useGetTitle } from "./useGetTitle"
+import { useGetRecentPost, useGetTitle } from './hooks'
 
 export default defineComponent({
   name: 'HomePage',
@@ -115,11 +112,8 @@ export default defineComponent({
      * TODO: 最近文章翻頁 (需要後端接口，首頁的基本資料："文章總數"、分類數量、標籤數量、標題...)
      */
 
-    // 获取数据
-    const { recentPost,getRecentPostStatus } = useGetRecentPost();
-    // 获取标题
-    const { subTitle } = useGetTitle();
-
+    const { recentPost, getRecentPostStatus } = useGetRecentPost()
+    const { subTitle } = useGetTitle()
 
     return {
       recentPost,
