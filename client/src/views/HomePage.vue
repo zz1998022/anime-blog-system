@@ -156,10 +156,10 @@ export default defineComponent({
 
     // TODO: 輸入完成 到 開始刪除 的間隔 添加一個 class 讓 光標有閃爍的動畫
 
-    // 偵測 config.mode 並以不同的方式調用 handleSubTitle
-
     // 副標題打字效果
     /**
+     * @function handleSubTitle
+     * * 調用核心函式前的模式處理及基本聲明變量
      * @param {string} subTitle - 模式 : order, random
      * @param {string} subTitleData - 副標題陣列
      */
@@ -184,6 +184,11 @@ export default defineComponent({
         meow(subTitleData[0])
       }
 
+      /**
+       * @function meow - 核心函數
+       *  * 處理打字頁面的打字效果，也包括調用下一次核心函數的模式處理
+       * @param {string} subTitle - 副標題
+       */
       function meow(title: string) {
         const titleLen = title.length
 
