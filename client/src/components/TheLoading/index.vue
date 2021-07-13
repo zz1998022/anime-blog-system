@@ -1,5 +1,5 @@
 <template>
-  <div class="mask"></div>
+  <div class="mask">loading</div>
 </template>
 
 <script lang="ts">
@@ -20,5 +20,9 @@ export default defineComponent({
   width: 100%;
   background-color: #000;
   transition: opacity 5s;
+  color: #fff;
+  font-size: 100px;
+  font-weight: 600;
+  text-align: center;
 }
 </style>

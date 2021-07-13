@@ -16,13 +16,18 @@ export default defineComponent({
     const loaded = ref(true)
 
     onMounted(() => {
-      loaded.value = false
+      console.log('onMounted')
+
+      window.addEventListener('load', () => {
+        console.log('window loaded')
+        loaded.value = false
+      })
     })
 
     return {
-      loaded
+      loaded,
     }
-  }
+  },
 })
 </script>
 
