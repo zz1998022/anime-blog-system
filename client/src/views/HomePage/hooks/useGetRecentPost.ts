@@ -22,7 +22,6 @@ export const useGetRecentPost = () => {
     try {
       // 请求最近文章
       const res: { data: Post[] } = await loliGet(homePage.recently, {
-        // 應該要寫到 api 資料夾裡，然後傳入參數就好
         pageNum: 1,
         pageSize: 10,
       })
