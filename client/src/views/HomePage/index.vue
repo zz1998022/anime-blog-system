@@ -98,6 +98,12 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
+<<<<<<< HEAD:client/src/views/HomePage/index.vue
+=======
+import dayjs from 'dayjs'
+import _random from 'lodash/random'
+import { loliGet } from '@/utils/loli'
+>>>>>>> 6176adcd65e32f26284f2883a62b152eab4935d8:client/src/views/HomePage.vue
 import { TheNav, TheFooter } from '@/components'
 // 引入获取数据方法
 import { useGetRecentPost } from './useGetRecentPost'
@@ -112,8 +118,7 @@ export default defineComponent({
   },
   setup() {
     /**
-     * TODO: 自訂義 Hook 函數分離業務邏輯
-     * ?: 最近文章翻頁 (需要後端接口，首頁的基本資料："文章總數"、分類數量、標籤數量、標題...)
+     * TODO: 最近文章翻頁 (需要後端接口，首頁的基本資料："文章總數"、分類數量、標籤數量、標題...)
      */
 
     // 获取数据
