@@ -150,7 +150,7 @@ export default defineComponent({
       delete: 50, // 刪除速度 (毫秒)
       switch: 1500, // 從 輸入完成 到 開始刪除 的間隔 (毫秒)
       next: 300, // 刪除完成後 切換到 下一個副標題　的間隔 (毫秒)
-      mode: 'order', // 當 subTitleData 大於 1 時，可選擇：'order'(順序) 或 'random'(隨機)
+      mode: 'order', // 模式: 'order'(順序), 'random'(隨機)，當 subTitleData.length 大於 1 時生效
     }
     const subTitleData = ['愛貓就不要％貓', 'Sakura Miko 是我婆', 'PekoMiko 是真理'] // 暫時假數據（應該要是從接口拿的）
 
