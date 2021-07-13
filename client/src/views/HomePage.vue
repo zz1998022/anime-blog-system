@@ -99,6 +99,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
 import dayjs from 'dayjs'
+import _random from 'lodash/random'
 import { loliGet } from '@/utils/loli'
 import { TheNav, TheFooter } from '@/components'
 
@@ -121,8 +122,7 @@ export default defineComponent({
   },
   setup() {
     /**
-     * TODO: 自訂義 Hook 函數分離業務邏輯
-     * ?: 最近文章翻頁 (需要後端接口，首頁的基本資料："文章總數"、分類數量、標籤數量、標題...)
+     * TODO: 最近文章翻頁 (需要後端接口，首頁的基本資料："文章總數"、分類數量、標籤數量、標題...)
      */
     const recentPost = ref() // 請求數據
     const getRecentPostStatus = ref(false) // 請求狀態
@@ -150,37 +150,86 @@ export default defineComponent({
       delete: 50, // 刪除速度 (毫秒)
       switch: 1500, // 從 輸入完成 到 開始刪除 的間隔 (毫秒)
       next: 300, // 刪除完成後 切換到 下一個副標題　的間隔 (毫秒)
+      mode: 'order', // 當 subTitleData 大於 1 時，可選擇：'order'(順序) 或 'random'(隨機)
     }
-    const subTitleData = '愛貓就不要％貓' // 暫時假數據（應該要是從接口拿的）
-    const subTitleDataLen = subTitleData.length
+    const subTitleData = ['愛貓就不要％貓', 'Sakura Miko 是我婆', 'PekoMiko 是真理'] // 暫時假數據（應該要是從接口拿的）
 
     // TODO: 輸入完成 到 開始刪除 的間隔 添加一個 class 讓 光標有閃爍的動畫
-    // TODO: 支援 array 類型，兩種模式：順序、隨機
+
+    // 偵測 config.mode 並以不同的方式調用 handleSubTitle
 
     // 副標題打字效果
-    function handelSubTitle() {
-      new Promise(resolve => {
-        // 輸入
-        for (let i = 0; i < subTitleDataLen; i++) {
-          setTimeout(() => {
-            subTitle.value += subTitleData[i]
-            if (i === subTitleDataLen - 1) setTimeout(() => resolve(null), config.switch)
-          }, i * config.type)
+    /**
+     * @param {string} subTitle - 模式 : order, random
+     * @param {string} subTitleData - 副標題陣列
+     */
+    function handelSubTitle(subTitleData: string[], mode: string = 'order') {
+      const subTitleDataLen = subTitleData.length
+      let nextOrder = 0 // 順序模式下一個索引值
+
+      // 檢查數量再啟用模式
+      if (subTitleDataLen > 1) {
+        switch (mode) {
+          case 'order':
+            // 順序
+            meow(subTitleData[0])
+            nextOrder++
+            break
+          case 'random':
+            // 隨機
+            meow(subTitleData[_random(0, subTitleDataLen - 1)])
+            break
         }
-      }).then(() => {
-        // 刪除
-        for (let i = 0; i < subTitleDataLen; i++) {
-          setTimeout(() => {
-            subTitle.value = subTitle.value.split('').slice(0, -1).join('')
-            // 下一個
-            if (i === subTitleDataLen - 1) setTimeout(() => handelSubTitle(), config.next)
-          }, i * config.delete)
-        }
-      })
+      } else {
+        meow(subTitleData[0])
+      }
+
+      function meow(title: string) {
+        const titleLen = title.length
+
+        new Promise(resolve => {
+          // 輸入
+          for (let i = 0; i < titleLen; i++) {
+            setTimeout(() => {
+              subTitle.value += title[i]
+              if (i === titleLen - 1) setTimeout(() => resolve(null), config.switch)
+            }, i * config.type)
+          }
+        })
+          .then(() => {
+            // 刪除
+            return new Promise(resolve => {
+              for (let i = 0; i < titleLen; i++) {
+                setTimeout(() => {
+                  subTitle.value = subTitle.value.split('').slice(0, -1).join('')
+                  // 下一個
+                  if (i === titleLen - 1) setTimeout(() => resolve(null), config.next)
+                }, i * config.delete)
+              }
+            })
+          })
+          .then(() => {
+            // 調用下一次前的模式處理
+            if (subTitleDataLen === 0) return meow(subTitleData[0]) // 長度為 0 時，直接使用第一個值
+
+            switch (mode) {
+              case 'order':
+                // 順序
+                if (nextOrder === subTitleDataLen) nextOrder = 0 // 超過限制，重置
+                meow(subTitleData[nextOrder])
+                nextOrder++
+                break
+              case 'random':
+                // 隨機
+                meow(subTitleData[_random(0, subTitleDataLen - 1)])
+                break
+            }
+          })
+      }
     }
 
     onMounted(() => {
-      handelSubTitle()
+      handelSubTitle(subTitleData, 'random')
     })
 
     return {
