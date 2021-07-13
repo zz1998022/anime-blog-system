@@ -157,6 +157,7 @@ export default defineComponent({
     // TODO: 輸入完成 到 開始刪除 的間隔 添加一個 class 讓 光標有閃爍的動畫
 
     // 副標題打字效果
+    // ! 疑似有性能問題
     /**
      * @function handleSubTitle
      * * 調用核心函式前的模式處理及基本聲明變量
