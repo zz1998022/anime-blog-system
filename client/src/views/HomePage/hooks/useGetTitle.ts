@@ -25,10 +25,11 @@ export const useGetTitle = () => {
    * @param {string} subTitleData - 副標題陣列
    */
   function handelSubTitle(subTitleData: string[], mode: string = 'order') {
-    const subTitleDataLen = subTitleData.length
+    const subTitleDataLength = subTitleData.length
+    const subTitleDataIndexLength = subTitleDataLength - 1
     let nextOrder = 0 // 順序模式下一個索引值
     // 檢查數量再啟用模式
-    if (subTitleDataLen > 1) {
+    if (subTitleDataLength > 1) {
       switch (mode) {
         case 'order':
           // 順序
@@ -37,7 +38,7 @@ export const useGetTitle = () => {
           break
         case 'random':
           // 隨機
-          meow(subTitleData[_random(0, subTitleDataLen - 1)])
+          meow(subTitleData[_random(0, subTitleDataIndexLength, false)])
           break
       }
     } else {
@@ -74,17 +75,17 @@ export const useGetTitle = () => {
         })
         .then(() => {
           // 調用下一次前的模式處理
-          if (subTitleDataLen === 0) return meow(subTitleData[0]) // 長度為 0 時，直接使用第一個值
+          if (subTitleDataLength === 0) return meow(subTitleData[0]) // 長度為 0 時，直接使用第一個值
           switch (mode) {
             case 'order':
               // 順序
-              if (nextOrder === subTitleDataLen) nextOrder = 0 // 超過限制，重置
+              if (nextOrder === subTitleDataLength) nextOrder = 0 // 超過限制，重置
               meow(subTitleData[nextOrder])
               nextOrder++
               break
             case 'random':
               // 隨機
-              meow(subTitleData[_random(0, subTitleDataLen - 1)])
+              meow(subTitleData[_random(0, subTitleDataIndexLength, false)])
               break
           }
         })
