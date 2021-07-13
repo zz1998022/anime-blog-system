@@ -5,6 +5,8 @@ export default class HomePage extends Service {
   public async getHomePageInfo() {
     const { app,ctx } = this;
 
+    // 获取个人信息sql
+    const UserNameSql = `select users.nickname from anime_users as users;`;
     // 获取文章数量sql
     const ArticleCountSql = `select COUNT(*) as total FROM anime_article;`;
     // 获取标签数量sql
@@ -18,18 +20,19 @@ export default class HomePage extends Service {
 
     try {
       // 执行sql
+      const UserNameResult = await app.mysql.query(UserNameSql,[]);
       const ArticleResult = await app.mysql.query(ArticleCountSql, []);
       const TagCountResult = await app.mysql.query(TagCountSql, []);
       const CateCountResult = await app.mysql.query(CateCountSql, []);
       const CateResult = await app.mysql.query(CateSql, []);
       const TagResult = await app.mysql.query(TagSql, []);
-
       // 响应数据
       ctx.body = {
         code: 200,
         message: '数据获取成功',
         success: true,
         data: {
+          nickname: UserNameResult[0].nickname,
           articleCount: ArticleResult[0].total,
           tag: {
             count: TagCountResult[0].tagCount,
