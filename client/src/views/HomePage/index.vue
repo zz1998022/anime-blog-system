@@ -97,7 +97,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { TheNav, TheFooter } from '@/components'
 // 引入获取数据方法
 import { useGetRecentPost } from './useGetRecentPost'
