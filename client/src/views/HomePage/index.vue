@@ -98,20 +98,11 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
-import dayjs from 'dayjs'
-import { loliGet } from '@/utils/loli'
 import { TheNav, TheFooter } from '@/components'
-
-interface Post {
-  id: number
-  title: string
-  content: string
-  publishTime: string
-  updateTime?: string
-  category?: string
-  tag?: string
-  picture?: string
-}
+// 引入获取数据方法
+import { useGetRecentPost } from './useGetRecentPost'
+// 引入获取标题方法
+import { useGetTitle } from "./useGetTitle"
 
 export default defineComponent({
   name: 'HomePage',
@@ -124,64 +115,12 @@ export default defineComponent({
      * TODO: 自訂義 Hook 函數分離業務邏輯
      * ?: 最近文章翻頁 (需要後端接口，首頁的基本資料："文章總數"、分類數量、標籤數量、標題...)
      */
-    const recentPost = ref() // 請求數據
-    const getRecentPostStatus = ref(false) // 請求狀態
 
-    // 請求最近文章
-    loliGet('/article/recently/', {
-      // 應該要寫到 api 資料夾裡，然後傳入參數就好
-      pageNum: 1,
-      pageSize: 10,
-    }).then((res: { data: Post[] }) => {
-      // 請求成功
-      getRecentPostStatus.value = true
+    // 获取数据
+    const { recentPost,getRecentPostStatus } = useGetRecentPost();
+    // 获取标题
+    const { subTitle } = useGetTitle();
 
-      // 格式化日期
-      recentPost.value = res.data.map(item => {
-        item.publishTime = dayjs(item.publishTime).format('YYYY/DD/MM')
-        return item
-      })
-    })
-
-    const subTitle = ref('') // 副標題
-    const config = {
-      // 這個之後也是從接口拿（因為之後會有後台管理可以自訂該 config
-      type: 200, // 輸入速度 (毫秒)
-      delete: 50, // 刪除速度 (毫秒)
-      switch: 1500, // 從 輸入完成 到 開始刪除 的間隔 (毫秒)
-      next: 300, // 刪除完成後 切換到 下一個副標題　的間隔 (毫秒)
-    }
-    const subTitleData = '愛貓就不要％貓' // 暫時假數據（應該要是從接口拿的）
-    const subTitleDataLen = subTitleData.length
-
-    // TODO: 輸入完成 到 開始刪除 的間隔 添加一個 class 讓 光標有閃爍的動畫
-    // TODO: 支援 array 類型，兩種模式：順序、隨機
-
-    // 副標題打字效果
-    function handelSubTitle() {
-      new Promise(resolve => {
-        // 輸入
-        for (let i = 0; i < subTitleDataLen; i++) {
-          setTimeout(() => {
-            subTitle.value += subTitleData[i]
-            if (i === subTitleDataLen - 1) setTimeout(() => resolve(null), config.switch)
-          }, i * config.type)
-        }
-      }).then(() => {
-        // 刪除
-        for (let i = 0; i < subTitleDataLen; i++) {
-          setTimeout(() => {
-            subTitle.value = subTitle.value.split('').slice(0, -1).join('')
-            // 下一個
-            if (i === subTitleDataLen - 1) setTimeout(() => handelSubTitle(), config.next)
-          }, i * config.delete)
-        }
-      })
-    }
-
-    onMounted(() => {
-      handelSubTitle()
-    })
 
     return {
       recentPost,
