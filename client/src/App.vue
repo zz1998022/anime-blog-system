@@ -1,10 +1,10 @@
 <template>
-  <!-- <TheLoading /> -->
+  <TheLoading v-if="loaded" />
   <router-view></router-view>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref, onMounted } from 'vue'
 import { TheLoading } from './components'
 
 export default defineComponent({
@@ -12,6 +12,17 @@ export default defineComponent({
   components: {
     TheLoading,
   },
+  setup() {
+    const loaded = ref(true)
+
+    onMounted(() => {
+      loaded.value = false
+    })
+
+    return {
+      loaded
+    }
+  }
 })
 </script>
 
