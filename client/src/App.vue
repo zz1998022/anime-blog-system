@@ -4,30 +4,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
-import { TheLoading } from './components'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'App',
-  components: {
-    TheLoading,
-  },
-  setup() {
-    const loaded = ref(true)
-
-    onMounted(() => {
-      console.log('onMounted')
-
-      window.addEventListener('load', () => {
-        console.log('window loaded')
-        loaded.value = false
-      })
-    })
-
-    return {
-      loaded,
-    }
-  },
 })
 </script>
 
