@@ -5,12 +5,12 @@
     <TheNav />
 
     <!-- 背景圖與標題 -->
-    <a-layout-content class="main-background">
+    <div class="main-background">
       <div class="title-container">
         <h2 class="main-title">NekoChan</h2>
         <h3 class="sub-title">{{ subTitle }}</h3>
       </div>
-    </a-layout-content>
+    </div>
   </header>
 
   <!-- 主要內容 -->
