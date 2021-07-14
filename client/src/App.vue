@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onBeforeMount } from 'vue'
+import { defineComponent } from 'vue'
 import { TheLoading } from './components'
 
 export default defineComponent({
