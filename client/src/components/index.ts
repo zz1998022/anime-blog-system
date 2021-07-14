@@ -1,4 +1,5 @@
 import TheNav from './TheNav.vue'
 import TheFooter from './TheFooter.vue'
+import TheLoading from './TheLoading.vue'
 
-export { TheNav, TheFooter }
+export { TheLoading, TheNav, TheFooter }
