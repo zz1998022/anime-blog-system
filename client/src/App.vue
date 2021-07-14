@@ -1,5 +1,4 @@
 <template>
-  <TheLoading v-if="loaded" />
   <router-view></router-view>
 </template>
 
