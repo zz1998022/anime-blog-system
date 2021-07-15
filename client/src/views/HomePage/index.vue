@@ -25,7 +25,6 @@
             <div class="post-card-picture">
               <img :src="post.picture" loading="lazy" />
             </div>
-
             <!-- 文章資訊 -->
             <div class="post-info">
               <h3 class="post-title">
