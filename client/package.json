@@ -10,7 +10,7 @@
     "prettier": "prettier --write ."
   },
   "dependencies": {
-    "ant-design-vue": "^2.2.0-rc.1",
+    "ant-design-vue": "^2.2.2",
     "axios": "^0.21.1",
     "dayjs": "^1.10.6",
     "vue": "^3.0.5",

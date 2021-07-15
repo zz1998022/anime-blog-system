@@ -169,10 +169,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.1.4.tgz#c14c461ec42ea2c1556e86f60b0354341d91adc3"
   integrity sha512-6O45kZAmkLvzGLToBxEz4lR2W6kXohCtebV2UxjH9GXjd8X9AhEn68FN9eNanFtWNzvgw1hqd6HkPRVQalqf7Q==
 
-ant-design-vue@^2.2.0-rc.1:
-  version "2.2.0-rc.1"
-  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.2.0-rc.1.tgz#5e32e102c64f517d469c7af403cd6133b4ac8b45"
-  integrity sha512-cRqOpPrw6aoW+1LmMMf8cFlVKzhBSrmZUCfEn8jA1yp7gp6zj+wGkhT9jz6NUfPWRXmGgbf0hXi0rHkhWaFAOQ==
+ant-design-vue@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/ant-design-vue/-/ant-design-vue-2.2.2.tgz#197388583c4e0b8ccd9c50ed19831ede27c2b919"
+  integrity sha512-Gmed9dVw4oqYmuO3ubkXbRBadldE82XSt6Gqq3F2grvORKXYoJF/3CaMwfyRN81UaoRhWVTHmLeGLzuVpwJepw==
   dependencies:
     "@ant-design/icons-vue" "^6.0.0"
     "@babel/runtime" "^7.10.5"
